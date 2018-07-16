@@ -1,6 +1,8 @@
 [safira]: https://github.com/cesium/safira
+[semaphore]: https://semaphoreci.com/cesiuminho/moonstone
 
 # Moonstone
+[![Build Status](https://semaphoreci.com/api/v1/cesiuminho/moonstone/branches/master/badge.svg)][semaphore]
 > A gem isn't complete without another.
 
 This is a react web app that contains the front-end part of [safira][safira]
