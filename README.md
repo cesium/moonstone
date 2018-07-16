@@ -10,12 +10,24 @@ API.
 
 ### Development
 
-`yarn start`
-Starts the development server.
+1. Install dependencies:
+```shell
+yarn install
+```
 
-`yarn build`
-Bundles the app into static files for production.
+2. Starts the development server:
+```shell
+yarn start
+```
 
-`yarn test`
-Starts the test runner.
+3. Bundles the app into static files for production:
+```shell
+yarn build
+```
+
+4. Starts the test runner:
+```shell
+yarn test
+```
+
 
