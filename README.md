@@ -1,35 +1,65 @@
-[safira]: https://github.com/cesium/safira
-[semaphore]: https://semaphoreci.com/cesiuminho/moonstone
+<h1 align="center"> Moonstone </h1>
 
-# Moonstone
-[![Build Status](https://semaphoreci.com/api/v1/cesiuminho/moonstone/branches/master/badge.svg)][semaphore]
-> A gem isn't complete without another.
+<p align="center">
+    <code>A gem isn't complete without another</code>
+</p>
 
-This is a react web app that contains the front-end part of [safira][safira]
-API.
+<p align="center">
+    <a href="https://semaphoreci.com/cesiuminho/moonstone"><img src="https://semaphoreci.com/api/v1/cesiuminho/moonstone/branches/master/badge.svg" alt="Semaphore Status"></a>
+</p>
 
-## Setup
+## About Moonstone
 
-### Development
+React Web App for the Badge Platform for CeSIUM's Computer Engineering Week
+event.
 
-1. Install dependencies:
+This is a collaborative project alongside the
+[safira](https://github.com/cesium/safira) backend platform.
+
+## Getting Started
+
+These instructions will get you a copy of the project up and running on your
+local machine for development and testing purposes.
+
+### Prerequisites
+
+- [Yarn](https://yarnpkg.com/lang/en/) - Provides a fast, reliable and secure node package manager.
+[Checkout installation guidelines](https://yarnpkg.com/lang/en/docs/install).
+
+### Installing
+
+Installing Yarn dependecies.
+
 ```shell
 yarn install
 ```
 
-2. Starts the development server:
+### Development
+
+Starting the development server.
+
 ```shell
 yarn start
 ```
 
-3. Bundles the app into static files for production:
-```shell
-yarn build
-```
+Running tests.
 
-4. Starts the test runner:
 ```shell
 yarn test
 ```
 
+### Deployment
 
+Bundling the app into static files for production.
+
+```shell
+yarn build
+```
+
+## Contributing
+
+Please read [CONTRIBUTING](CONTRIBUTING.md) and [CODE_OF_CONDUCT](CODE_OF_CONDUCT.md) for details on our code of conduct and the process for submitting pull requests to us.
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE.txt) file for details.
