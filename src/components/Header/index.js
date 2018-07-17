@@ -2,9 +2,13 @@ import React from "react";
 
 import "./index.css"
 
+import { Link } from 'react-router-dom';
+
 const Header = () => (
       <div>
-        Aqui é para escrever o Header
+        <nav>
+          <Link to='/'>Home</Link>
+        </nav>
       </div>
 );
 
