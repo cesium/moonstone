@@ -14,7 +14,7 @@ React Web App for the Badge Platform for CeSIUM's Computer Engineering Week
 event.
 
 This is a collaborative project alongside the
-[safira](https://github.com/cesium/safira) backend platform.
+[Safira](https://github.com/cesium/safira) backend platform.
 
 ## Getting Started
 
