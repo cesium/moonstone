@@ -1,15 +1,17 @@
-import React from "react";
-
-import "./index.css"
+import React, { Component } from "react";
 
 import { Link } from 'react-router-dom';
 
-const Header = () => (
-      <div>
-        <nav>
-          <Link to='/'>Home</Link>
-        </nav>
-      </div>
-);
+import "./index.css";
 
-export default Header;
+export default class Header extends Component {
+  render() {
+    return (
+      <div>
+      <nav>
+        <Link to='/'>Home</Link>
+      </nav>
+    </div>
+    );
+  }
+}
