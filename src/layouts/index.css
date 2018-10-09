@@ -1,0 +1,21 @@
+.Layout {
+  display: flex;
+  flex-direction: column;
+
+  width: 100%;
+
+  background: #ffffff;
+}
+
+.Layout-body {
+  padding: 56px 14px 0;
+
+  background: radial-gradient(568.87px at 0% 0%, #ffffff 0%, #f0f4fd 100%);
+}
+
+@media screen and (min-width: 748px) {
+  .Layout-body {
+    margin: 0 28px;
+    padding: 118px 112px;
+  }
+}
