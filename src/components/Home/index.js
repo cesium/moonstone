@@ -1,16 +1,17 @@
-import React from "react";
+import React, { Component } from "react";
 
-import "./index.css"
+import { Header, Footer } from "../../components";
 
-import Header from "../Header";
-import Footer from "../Footer";
+import "./index.css";
 
-const Home = () => (
+export default class Home extends Component {
+  render() {
+    return (
       <div>
         <Header />
-          <h1>SEI 2019</h1>
+        <h1>SEI 2019</h1>
         <Footer />
       </div>
-);
-
-export default Home;
+    );
+  }
+}

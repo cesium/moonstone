@@ -1,8 +1,23 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import registerServiceWorker from './registerServiceWorker';
+import React from "react";
+import ReactDOM from "react-dom";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 
-ReactDOM.render(<App />, document.getElementById('root'));
+import registerServiceWorker from "./registerServiceWorker";
+import IndexPage from "./pages/index";
+import Layout from "./layouts/index";
+
+import "./index.css";
+
+const Root = () => (
+  <Layout>
+    <BrowserRouter>
+      <Switch>
+        <Route exact path="/" component={IndexPage} />
+        {/* <Route component={Error404} /> */}
+      </Switch>
+    </BrowserRouter>
+  </Layout>
+);
+
+ReactDOM.render(<Root />, document.getElementById("root"));
 registerServiceWorker();
