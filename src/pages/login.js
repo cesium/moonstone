@@ -1,39 +1,76 @@
-import React, { Component };
-import { FormField, TextInput } from "grommet";
+import React, {Component} from 'react';
+import {Button, FormField, Text, TextInput} from "grommet";
+import request from "superagent/lib/client";
 
+const api_endpoint = '';
 
-class Login extends Component {
+export default class Login extends Component {
 
-    render() {
-        return (
-	  <FormField label="Email">
-            <TextInput 
-              onChange={this.props.onChangeEmail}
-            />
-          <FormField />
-          <FromField label="Username">
-            <TextInput
-              onChange={this.props.onChangeUsername}
-            />
-          <FormField />
-          <FormField label="Password">
-  	    <TextInput type="password" 
-               onChange={this.props.onChangePassword}
-            />
-          </FormField>
-          <FormField label="Confirm password">
-  	    <TextInput type="password" 
-               onChange={this.props.onChangeConfirmPassword}
-            />
-          </FormField>
-          <Button
-            type="submit"
-            label="Register"
-            primary
-            onClick={() => this.register()}
-          />
-        );        
+  constructor(props) {
+    super(props);
+    this.state = {
+      email: '',
+      password: '',
+      error: ''
+    };
+  }
+
+  onChangeEmail = event => {
+    this.setState({email: event.target.value});
+  };
+
+  onChangePassword = event => {
+    this.setState({password: event.target.value});
+  };
+
+  handle_login_response(res) {
+    if (res.hasOwnProperty('jwt')) {
+      this.setState({error: ''});
+      //TODO store session token
+      //TODO redirect to home page
+    } else {
+      this.setState({error: res.error})
     }
-}
+  }
 
-export default userSession(Login);
+  getErrorText() {
+    return this.state.error !== '' ? "Invalid email or password" : "";
+  }
+
+  login = () => {
+    /* TODO fix CORS and test this */
+    request
+      .post(api_endpoint)
+      .send({email: this.state.email, password: this.state.password})
+      .then(res => this.handle_login_response(res));
+  };
+
+  render() {
+    return <div>
+      <FormField label="Email">
+        <TextInput
+          onChange={e => this.onChangeEmail(e)}
+        />
+      </FormField>
+
+      <FormField label="Password">
+        <TextInput type="password"
+                   onChange={e => this.onChangePassword(e)}
+        />
+      </FormField>
+
+      <Button
+        type="submit"
+        label="Login"
+        primary
+        onClick={() => this.login()}
+      />
+
+      <br/><br/>
+      <Text color='status-critical'>
+        {this.getErrorText()}
+      </Text>
+
+    </div>;
+  }
+}
