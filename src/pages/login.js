@@ -26,8 +26,8 @@ export default class Login extends Component {
   handle_login_response(res) {
     if (res.hasOwnProperty('jwt')) {
       this.setState({error: ''});
-      //TODO store session token
-      //TODO redirect to home page
+      localStorage.jwt = res.jwt;
+      window.location.pathname = '/';
     } else {
       this.setState({error: res.error})
     }

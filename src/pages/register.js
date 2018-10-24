@@ -33,23 +33,11 @@ export default class Register extends Component {
     this.setState({password_confirmation: event.target.value});
   };
 
-  state_to_api_json() {
-    return {
-      attendee: {
-        id: this.state.id,
-        nickname: this.state.nickname
-      },
-      email: this.state.email,
-      password: this.state.password,
-      password_confirmation: this.state.password_confirmation
-    }
-  }
-
   handle_register_response(res) {
     if (res.hasOwnProperty('jwt')) {
       this.setState({errors: {}});
-      //TODO store session token
-      //TODO redirect to home page
+      localStorage.jwt = res.jwt;
+      window.location.pathname = '/';
     } else {
       this.setState({errors: res.errors})
     }
@@ -65,6 +53,7 @@ export default class Register extends Component {
         case 'has already been taken':
           text = "Email taken";
           break;
+        default: break;
       }
     } else if (this.state.errors.hasOwnProperty('password_confirmation')) {
       text = "Passwords do not match";
@@ -75,14 +64,24 @@ export default class Register extends Component {
   }
 
   componentDidMount() {
-    //TODO fetch id
+    this.setState({id: this.props.match.params.id});
   }
 
   register = () => {
     /* TODO fix CORS and test this */
     request
       .post(api_endpoint)
-      .send(this.state_to_api_json())
+      .withCredentials()
+      .send({
+          attendee: {
+              id: this.state.id,
+              nickname: this.state.nickname
+          },
+          email: this.state.email,
+          password: this.state.password,
+          password_confirmation: this.state.password_confirmation
+      })
+      .on('error', e => console.log(e))
       .then(res => this.handle_register_response(res));
   };
 
