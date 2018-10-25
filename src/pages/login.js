@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {Button, FormField, Text, TextInput} from "grommet";
-import request from "superagent/lib/client";
+import axios from 'axios';
 
 export default class Login extends Component {
   constructor(props) {
@@ -21,6 +21,7 @@ export default class Login extends Component {
   };
 
   handleLoginResponse(res) {
+    console.log(res);
     if (res.hasOwnProperty('jwt')) {
       this.setState({error: ''});
       localStorage.jwt = res.jwt;
@@ -35,11 +36,13 @@ export default class Login extends Component {
   }
 
   login = () => {
-    /* TODO fix CORS and test this */
-    request
-      .post(process.env.REACT_APP_API_URL + 'api/auth/sign_in')
-      .send({email: this.state.email, password: this.state.password})
-      .then(res => this.handleLoginResponse(res));
+    const api_endpoint = process.env.REACT_APP_ENDPOINT
+                       + process.env.REACT_APP_API_AUTH_SIGN_IN;
+    console.log(this.state);
+    console.log(api_endpoint);
+    axios.post(api_endpoint, {email: this.state.email, password: this.state.password})
+         .then(res => this.handleLoginResponse(res))
+         .catch(res => {console.log(res); this.setState({error: "Login error"});});
   };
 
   render() {

@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {Text, Button, FormField, TextInput} from "grommet";
-import request from "superagent/lib/client";
+import axios from "axios";
 
 export default class Register extends Component {
   constructor(props) {
@@ -65,19 +65,19 @@ export default class Register extends Component {
   }
 
   register = () => {
-    /* TODO fix CORS and test this */
-    request
-      .post(process.env.REACT_APP_API_URL + 'api/auth/sign_up')
-      .send({
-          attendee: {
-              id: this.state.id,
-              nickname: this.state.nickname
-          },
-          email: this.state.email,
-          password: this.state.password,
-          password_confirmation: this.state.password_confirmation
-      })
-      .then(res => this.handleRegisterResponse(res));
+    const api_endpoint = process.env.REACT_APP_ENDPOINT
+                       + process.env.REACT_APP_API_AUTH_SIGN_IN;
+    axios.post(URL, {
+        attendee: {
+            id: this.state.id,
+            nickname: this.state.nickname
+        },
+        email: this.state.email,
+        password: this.state.password,
+        password_confirmation: this.state.password_confirmation
+    })
+    .then(res => this.validateJson(res))
+    .catch(() => this.setState({error: "Register Error"}));
   };
 
   render() {

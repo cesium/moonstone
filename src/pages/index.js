@@ -31,17 +31,6 @@ export default class IndexPage extends Component {
             </Button>
           ))}
         </Box>
-        {/* <Box gridArea="header" align="center">
-          <Sidebar
-            title="My title"
-            width="full"
-            border="none"
-            collapsible={false}
-            basis="small"
-          >
-            <Text>Side item</Text>
-          </Sidebar>
-        </Box> */}
         <Box gridArea="nav" background="light-1" />
       </Grid>
     );
