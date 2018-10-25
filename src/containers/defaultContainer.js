@@ -5,7 +5,7 @@ const api_key = ''
 const api_endpoint = ''
 
 let state = {
-    username: "",
+
 }
 
 export default WrappedComponent =>

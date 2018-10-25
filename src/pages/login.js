@@ -23,7 +23,7 @@ export default class Login extends Component {
     this.setState({password: event.target.value});
   };
 
-  handle_login_response(res) {
+  handleLoginResponse(res) {
     if (res.hasOwnProperty('jwt')) {
       this.setState({error: ''});
       localStorage.jwt = res.jwt;
@@ -42,7 +42,7 @@ export default class Login extends Component {
     request
       .post(api_endpoint)
       .send({email: this.state.email, password: this.state.password})
-      .then(res => this.handle_login_response(res));
+      .then(res => this.handleLoginResponse(res));
   };
 
   render() {
@@ -74,3 +74,4 @@ export default class Login extends Component {
     </div>;
   }
 }
+

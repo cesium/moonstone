@@ -33,7 +33,7 @@ export default class Register extends Component {
     this.setState({password_confirmation: event.target.value});
   };
 
-  handle_register_response(res) {
+  handleRegisterResponse(res) {
     if (res.hasOwnProperty('jwt')) {
       this.setState({errors: {}});
       localStorage.jwt = res.jwt;
@@ -71,7 +71,6 @@ export default class Register extends Component {
     /* TODO fix CORS and test this */
     request
       .post(api_endpoint)
-      .withCredentials()
       .send({
           attendee: {
               id: this.state.id,
@@ -81,8 +80,7 @@ export default class Register extends Component {
           password: this.state.password,
           password_confirmation: this.state.password_confirmation
       })
-      .on('error', e => console.log(e))
-      .then(res => this.handle_register_response(res));
+      .then(res => this.handleRegisterResponse(res));
   };
 
   render() {
@@ -125,3 +123,4 @@ export default class Register extends Component {
     </div>;
   }
 }
+
