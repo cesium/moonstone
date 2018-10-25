@@ -3,7 +3,6 @@ import {Text, Button, FormField, TextInput} from "grommet";
 import request from "superagent/lib/client";
 
 export default class Register extends Component {
-
   constructor(props) {
     super(props);
     this.state = {

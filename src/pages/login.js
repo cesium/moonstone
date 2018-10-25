@@ -3,7 +3,6 @@ import {Button, FormField, Text, TextInput} from "grommet";
 import request from "superagent/lib/client";
 
 export default class Login extends Component {
-
   constructor(props) {
     super(props);
     this.state = {
