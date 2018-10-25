@@ -2,8 +2,6 @@ import React, {Component} from 'react';
 import {Button, FormField, Text, TextInput} from "grommet";
 import request from "superagent/lib/client";
 
-const api_endpoint = '';
-
 export default class Login extends Component {
 
   constructor(props) {
@@ -40,7 +38,7 @@ export default class Login extends Component {
   login = () => {
     /* TODO fix CORS and test this */
     request
-      .post(api_endpoint)
+      .post(process.env.REACT_APP_API_URL + 'api/auth/sign_in')
       .send({email: this.state.email, password: this.state.password})
       .then(res => this.handleLoginResponse(res));
   };
