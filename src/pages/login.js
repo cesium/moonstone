@@ -32,15 +32,24 @@ export default class Login extends Component {
   }
 
   getErrorText() {
-    return this.state.error !== '' ? "Invalid email or password" : "";
+    return this.state.error; // !== '' ? "Invalid email or password" : "";
   }
 
   login = () => {
     const api_endpoint = process.env.REACT_APP_ENDPOINT
                        + process.env.REACT_APP_API_AUTH_SIGN_IN;
+    let data = JSON.stringify({
+        email: this.state.email,
+        password: this.state.password
+    });
+    let headers = {
+        headers: {
+            'crossDomain': true,
+            'Content-Type': 'application/x-www-form-urlencoded',
+    }};
     console.log(this.state);
     console.log(api_endpoint);
-    axios.post(api_endpoint, {email: this.state.email, password: this.state.password})
+    axios.post(api_endpoint, data, headers)
          .then(res => this.handleLoginResponse(res))
          .catch(res => {console.log(res); this.setState({error: "Login error"});});
   };

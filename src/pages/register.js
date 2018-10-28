@@ -67,7 +67,7 @@ export default class Register extends Component {
   register = () => {
     const api_endpoint = process.env.REACT_APP_ENDPOINT
                        + process.env.REACT_APP_API_AUTH_SIGN_IN;
-    axios.post(URL, {
+    axios.post(api_endpoint, {
         attendee: {
             id: this.state.id,
             nickname: this.state.nickname
