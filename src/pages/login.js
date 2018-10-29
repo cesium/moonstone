@@ -21,37 +21,36 @@ export default class Login extends Component {
   };
 
   handleLoginResponse(res) {
-    console.log(res);
-    if (res.hasOwnProperty('jwt')) {
+    if (res.data.hasOwnProperty('jwt')) {
       this.setState({error: ''});
-      localStorage.jwt = res.jwt;
+      localStorage.jwt = res.data.jwt;
       window.location.pathname = '/';
     } else {
-      this.setState({error: res.error})
+      this.setState({error: "Login error"})
     }
   }
 
+  handleErrorResponse(res){
+      if(res.response){
+          this.setState({error: "Invalid email or password"})
+      }else{
+          this.setState({error: "Login error"})
+      }
+  }
+
   getErrorText() {
-    return this.state.error; // !== '' ? "Invalid email or password" : "";
+    return this.state.error;
   }
 
   login = () => {
     const api_endpoint = process.env.REACT_APP_ENDPOINT
                        + process.env.REACT_APP_API_AUTH_SIGN_IN;
-    let data = JSON.stringify({
+    axios.post(api_endpoint, {
         email: this.state.email,
         password: this.state.password
-    });
-    let headers = {
-        headers: {
-            'crossDomain': true,
-            'Content-Type': 'application/x-www-form-urlencoded',
-    }};
-    console.log(this.state);
-    console.log(api_endpoint);
-    axios.post(api_endpoint, data, headers)
+    })
          .then(res => this.handleLoginResponse(res))
-         .catch(res => {console.log(res); this.setState({error: "Login error"});});
+         .catch(res => this.handleErrorResponse(res));
   };
 
   render() {

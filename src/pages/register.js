@@ -31,13 +31,21 @@ export default class Register extends Component {
   };
 
   handleRegisterResponse(res) {
-    if (res.hasOwnProperty('jwt')) {
+    if (res.data.hasOwnProperty('jwt')) {
       this.setState({errors: {}});
       localStorage.jwt = res.jwt;
       window.location.pathname = '/';
     } else {
-      this.setState({errors: res.errors})
+      this.setState({errors: {"detail": "Register error"}})
     }
+  }
+
+  handleErrorResponse(res){
+      if(res.response){
+          console.log(res.response);
+      }else if(res.request){
+          console.log(res.request);
+      }
   }
 
   getErrorText() {
@@ -56,6 +64,8 @@ export default class Register extends Component {
       text = "Passwords do not match";
     } else if (this.state.errors.hasOwnProperty('detail')) {
       text = "Bad request";
+    } else {
+      text = this.state.errors;
     }
     return text;
   }
@@ -66,22 +76,26 @@ export default class Register extends Component {
 
   register = () => {
     const api_endpoint = process.env.REACT_APP_ENDPOINT
-                       + process.env.REACT_APP_API_AUTH_SIGN_IN;
-    axios.post(api_endpoint, {
-        attendee: {
-            id: this.state.id,
-            nickname: this.state.nickname
-        },
-        email: this.state.email,
-        password: this.state.password,
-        password_confirmation: this.state.password_confirmation
-    })
-    .then(res => this.validateJson(res))
-    .catch(() => this.setState({error: "Register Error"}));
+                       + process.env.REACT_APP_API_AUTH_SIGN_UP;
+    let data = {
+        user: {
+            email: this.state.email,
+            password: this.state.password,
+            password_confirmation: this.state.password_confirmation,
+            attendee: {
+                id: this.state.id,
+                nickname: this.state.nickname
+            }
+        }
+    };
+    axios.post(api_endpoint, data)
+         .then(res => this.handleRegisterResponse(res))
+         .catch(res => this.handleErrorResponse(res));
   };
 
   render() {
-    return <div>
+    return (
+        <div>
       <FormField label="Email">
         <TextInput
           onChange={e => this.onChangeEmail(e)}
@@ -114,10 +128,11 @@ export default class Register extends Component {
       />
       <br/><br/>
       <Text color='status-critical'>
-        {this.getErrorText()}
+        cenas
       </Text>
 
-    </div>;
+    </div>
+    );
   }
 }
 
