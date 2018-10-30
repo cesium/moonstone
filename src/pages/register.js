@@ -40,12 +40,12 @@ export default class Register extends Component {
     }
   }
 
-  handleErrorResponse(res){
-      if(res.response){
-          console.log(res.response);
-      }else if(res.request){
-          console.log(res.request);
-      }
+  handleErrorResponse(res) {
+    if (res.response) {
+      console.log(res.response);
+    } else if (res.request) {
+      console.log(res.request);
+    }
   }
 
   getErrorText() {
@@ -58,7 +58,8 @@ export default class Register extends Component {
         case 'has already been taken':
           text = "Email taken";
           break;
-        default: break;
+        default:
+          break;
       }
     } else if (this.state.errors.hasOwnProperty('password_confirmation')) {
       text = "Passwords do not match";
@@ -76,62 +77,62 @@ export default class Register extends Component {
 
   register = () => {
     const api_endpoint = process.env.REACT_APP_ENDPOINT
-                       + process.env.REACT_APP_API_AUTH_SIGN_UP;
+      + process.env.REACT_APP_API_AUTH_SIGN_UP;
     let data = {
-        user: {
-            email: this.state.email,
-            password: this.state.password,
-            password_confirmation: this.state.password_confirmation,
-            attendee: {
-                id: this.state.id,
-                nickname: this.state.nickname
-            }
+      user: {
+        email: this.state.email,
+        password: this.state.password,
+        password_confirmation: this.state.password_confirmation,
+        attendee: {
+          id: this.state.id,
+          nickname: this.state.nickname
         }
+      }
     };
     axios.post(api_endpoint, data)
-         .then(res => this.handleRegisterResponse(res))
-         .catch(res => this.handleErrorResponse(res));
+      .then(res => this.handleRegisterResponse(res))
+      .catch(res => this.handleErrorResponse(res));
   };
 
   render() {
     return (
-        <div>
-      <FormField label="Email">
-        <TextInput
-          onChange={e => this.onChangeEmail(e)}
+      <div>
+        <FormField label="Email">
+          <TextInput
+            onChange={e => this.onChangeEmail(e)}
+          />
+        </FormField>
+
+        <FormField label="Username">
+          <TextInput
+            onChange={e => this.onChangeNickname(e)}
+          />
+        </FormField>
+
+        <FormField label="Password">
+          <TextInput type="password"
+                     onChange={e => this.onChangePassword(e)}
+          />
+        </FormField>
+
+        <FormField label="Confirm password">
+          <TextInput type="password"
+                     onChange={e => this.onChangeConfirmPassword(e)}
+          />
+        </FormField>
+
+        <Button
+          type="submit"
+          label="Register"
+          primary
+          onClick={() => this.register()}
         />
-      </FormField>
+        <br/><br/>
+        <Text color='status-critical'>
+          cenas
+        </Text>
 
-      <FormField label="Username">
-        <TextInput
-          onChange={e => this.onChangeNickname(e)}
-        />
-      </FormField>
-
-      <FormField label="Password">
-        <TextInput type="password"
-                   onChange={e => this.onChangePassword(e)}
-        />
-      </FormField>
-
-      <FormField label="Confirm password">
-        <TextInput type="password"
-                   onChange={e => this.onChangeConfirmPassword(e)}
-        />
-      </FormField>
-
-      <Button
-        type="submit"
-        label="Register"
-        primary
-        onClick={() => this.register()}
-      />
-      <br/><br/>
-      <Text color='status-critical'>
-        cenas
-      </Text>
-
-    </div>
+      </div>
     );
   }
 }
