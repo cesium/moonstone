@@ -26,6 +26,7 @@ export default class Register extends Component {
   onChangePassword = event => {
     this.setState({password: event.target.value});
   };
+
   onChangeConfirmPassword = event => {
     this.setState({password_confirmation: event.target.value});
   };
@@ -41,34 +42,23 @@ export default class Register extends Component {
   }
 
   handleErrorResponse(res) {
-    if (res.response) {
-      console.log(res.response);
+    if (res.response) { // status code outside 2XX
+      this.setState({errors: res.response.data.errors});
     } else if (res.request) {
-      console.log(res.request);
+      this.setState({errors: {"detail": "Register error"}});
     }
   }
 
   getErrorText() {
-    let text = "";
     if (this.state.errors.hasOwnProperty('email')) {
-      switch (this.state.errors.email[0]) {
-        case 'has invalid format':
-          text = "Invalid email";
-          break;
-        case 'has already been taken':
-          text = "Email taken";
-          break;
-        default:
-          break;
-      }
+      return "Email " + this.state.errors.email[0];
     } else if (this.state.errors.hasOwnProperty('password_confirmation')) {
-      text = "Passwords do not match";
+      return "Passwords do not match";
     } else if (this.state.errors.hasOwnProperty('detail')) {
-      text = "Bad request";
+      return "Bad request";
     } else {
-      text = this.state.errors;
+      return "";
     }
-    return text;
   }
 
   componentDidMount() {
@@ -129,7 +119,7 @@ export default class Register extends Component {
         />
         <br/><br/>
         <Text color='status-critical'>
-          cenas
+          {this.getErrorText()}
         </Text>
 
       </div>
