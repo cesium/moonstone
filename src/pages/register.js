@@ -41,10 +41,14 @@ export default class Register extends Component {
     }
   }
 
-  handleErrorResponse(res) {
-    if (res.response) { // status code outside 2XX
-      this.setState({errors: res.response.data.errors});
-    } else if (res.request) {
+  handleErrorResponse(error) {
+    if (error.response) { // status code outside 2XX
+      if(error.response.data.hasOwnProperty('errors')){ // api not broken
+        this.setState({errors: error.response.data.errors});
+      }else{                                            // api still broken
+        this.setState({errors: {"register": error.response.data.error}});
+      }
+    } else if (error.request) {
       this.setState({errors: {"detail": "Register error"}});
     }
   }
@@ -54,6 +58,8 @@ export default class Register extends Component {
       return "Email " + this.state.errors.email[0];
     } else if (this.state.errors.hasOwnProperty('password_confirmation')) {
       return "Passwords do not match";
+    } else if (this.state.errors.hasOwnProperty('register')){
+      return "Register error";
     } else if (this.state.errors.hasOwnProperty('detail')) {
       return "Bad request";
     } else {
@@ -81,7 +87,7 @@ export default class Register extends Component {
     };
     axios.post(api_endpoint, data)
       .then(res => this.handleRegisterResponse(res))
-      .catch(res => this.handleErrorResponse(res));
+      .catch(error => this.handleErrorResponse(error));
   };
 
   render() {
