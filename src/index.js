@@ -4,6 +4,8 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 
 import registerServiceWorker from "./registerServiceWorker";
 import IndexPage from "./pages/index";
+import Login from "./pages/login";
+import Register from "./pages/register";
 import Layout from "./layouts/index";
 
 import "./index.css";
@@ -13,6 +15,8 @@ const Root = () => (
     <BrowserRouter>
       <Switch>
         <Route exact path="/" component={IndexPage} />
+        <Route exact path="/login" component={Login} />
+        <Route exact path="/register/:id" component={Register} />
         {/* <Route component={Error404} /> */}
       </Switch>
     </BrowserRouter>
@@ -21,3 +25,4 @@ const Root = () => (
 
 ReactDOM.render(<Root />, document.getElementById("root"));
 registerServiceWorker();
+

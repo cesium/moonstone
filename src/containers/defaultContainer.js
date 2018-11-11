@@ -1,10 +1,8 @@
 import React, { Component } from 'react'
 import superagent from 'superagent/lib/client'
 
-const api_key = ''
-const api_endpoint = ''
-
 let state = {
+
 }
 
 export default WrappedComponent =>
