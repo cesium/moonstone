@@ -43,9 +43,11 @@ export default class Register extends Component {
 
   handleErrorResponse(error) {
     if (error.response) { // status code outside 2XX
-      if(error.response.data.hasOwnProperty('errors')){ // api not broken
+      if(error.response.data.hasOwnProperty('errors')){
+          // API responded with a documented error
+          // https://github.com/cesium/safira/issues/37
         this.setState({errors: error.response.data.errors});
-      }else{                                            // api still broken
+      }else{
         this.setState({errors: {"register": error.response.data.error}});
       }
     } else if (error.request) {
