@@ -13,14 +13,14 @@ import "./index.css";
 
 export default class Home extends Component {
   render() {
-    console.log(this.props.size)
     return (
       <Box full fill={true} gridArea="nav" background="light-1">
         <Box align="center" pad={{ top: "large", bottom: "medium" }}>
-        {this.props.size !== "small" ? 
-          <QRCode renderAs="svg" value="http://seium.org" /> : 
-          <User color="brand" size="xlarge" />
-        }
+          {this.props.size !== "small" ? (
+            <QRCode renderAs="svg" value="http://seium.org" />
+          ) : (
+            <User color="brand" size="xlarge" />
+          )}
         </Box>
         <Box align="center">
           <Heading magin="xlarge" level="2">

@@ -20,7 +20,6 @@ class IndexPage extends Component {
                 { name: "nav", start: [1, 0], end: [1, 0] }
               ]} 
           >
-          
             <Header size={size} />
             <Home size={size} email={this.props.email}/> 
           </Grid>

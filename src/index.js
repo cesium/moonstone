@@ -8,10 +8,10 @@ import Layout from "./layouts/index";
 import Login from "./pages/login";
 import Register from "./pages/register";
 
- import "./index.css";
- 
- const Root = () => (
-   <Layout>
+import "./index.css";
+
+const Root = () => (
+  <Layout>
     <BrowserRouter>
       <Switch>
         <Route exact path="/" component={IndexPage} />
