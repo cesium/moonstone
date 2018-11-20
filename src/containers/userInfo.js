@@ -4,7 +4,6 @@ import axios from "axios";
 let state = {
   email: ""
 };
-// const api_endpoint = "https://sei19-safira.herokuapp.com/api/v1/user"
 export default WrappedComponent =>
   class userInfo extends Component {
     componentDidMount() {
