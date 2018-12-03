@@ -1,13 +1,6 @@
-import React, { Component } from "react";
-
-import { Header, Footer } from "../../components";
-import QRCode from "qrcode.react";
-import { Box, Text, Grid, Button, Heading, Anchor, ResponsiveContext, Distribution, 
-  Meter} from "grommet";
-import { Sidebar } from "grommet-controls";
-
-import { User, Achievement } from "grommet-icons"
-
+import React, {Component} from "react";
+import {Box, Heading, Meter} from "grommet";
+import {User, Achievement} from "grommet-icons"
 import "./index.css";
 
 
@@ -15,12 +8,8 @@ export default class Home extends Component {
   render() {
     return (
       <Box full fill={true} gridArea="nav" background="light-1">
-        <Box align="center" pad={{ top: "large", bottom: "medium" }}>
-          {this.props.size !== "small" ? (
-            <QRCode renderAs="svg" value="http://seium.org" />
-          ) : (
-            <User color="brand" size="xlarge" />
-          )}
+        <Box align="center" pad={{top: "large", bottom: "medium"}}>
+          <User color="brand" size="xlarge"/>
         </Box>
         <Box align="center">
           <Heading magin="xlarge" level="2">
@@ -28,7 +17,7 @@ export default class Home extends Component {
           </Heading>
           <Heading level="3">{this.props.email}</Heading>
         </Box>
-        <Box align="center" basis="xsmall" pad={{ vertical: "medium" }}>
+        <Box align="center" basis="xsmall" pad={{vertical: "medium"}}>
           <Meter
             size="small"
             type="circle"
@@ -47,13 +36,13 @@ export default class Home extends Component {
           />
         </Box>
         <Box
-          pad={{ horizontal: "medium", bottom: "medium" }}
+          pad={{horizontal: "medium", bottom: "medium"}}
           justify="center"
           direction="row"
         >
-          {[...Array(10).keys()].map(c => (
+          {[...Array(10).keys()].map(() => (
             <Box direction="row" basis="xxsmall" align="center">
-              <Achievement />
+              <Achievement/>
             </Box>
           ))}
         </Box>
