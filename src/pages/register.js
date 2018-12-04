@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Text, Button, FormField, TextInput} from "grommet";
+import {Text, Button, FormField, TextInput, Box} from "grommet";
 import axios from "axios";
 
 export default class Register extends Component {
@@ -11,7 +11,7 @@ export default class Register extends Component {
       password: '',
       password_confirmation: '',
       id: '',
-      errors: {}
+      error: ''
     };
   }
 
@@ -33,40 +33,31 @@ export default class Register extends Component {
 
   handleRegisterResponse(res) {
     if (res.data.hasOwnProperty('jwt')) {
-      this.setState({errors: {}});
+      this.setState({error: ''});
       localStorage.jwt = res.jwt;
       window.location.pathname = '/';
     } else {
-      this.setState({errors: {"detail": "Register error"}})
+      this.setState({error: "Register error"})
     }
   }
 
   handleErrorResponse(error) {
+    console.log(error)
     if (error.response) { // status code outside 2XX
-      if(error.response.data.hasOwnProperty('errors')){
-          // API responded with a documented error
-          // https://github.com/cesium/safira/issues/37
-        this.setState({errors: error.response.data.errors});
+      if(error.response.data.hasOwnProperty('error')){
+        this.setState({error: error.response.data.error});
+      }else if(error.response.data.hasOwnProperty('errors')){
+        this.setState({error: "Invalid token"});
       }else{
-        this.setState({errors: {"register": error.response.data.error}});
+        this.setState({error: "Register error"});
       }
     } else if (error.request) {
-      this.setState({errors: {"detail": "Register error"}});
+      this.setState({error: "Network Error"});
     }
   }
 
   getErrorText() {
-    if (this.state.errors.hasOwnProperty('email')) {
-      return "Email " + this.state.errors.email[0];
-    } else if (this.state.errors.hasOwnProperty('password_confirmation')) {
-      return "Passwords do not match";
-    } else if (this.state.errors.hasOwnProperty('register')){
-      return "Register error";
-    } else if (this.state.errors.hasOwnProperty('detail')) {
-      return "Bad request";
-    } else {
-      return "";
-    }
+    return this.state.error;
   }
 
   componentDidMount() {
@@ -94,43 +85,59 @@ export default class Register extends Component {
 
   render() {
     return (
-      <div>
+      <Box
+        justify="center"
+        align="center"
+        pad="xlarge"
+        gap="medium"
+      >
+
+      <Box alignSelf="center">
         <FormField label="Email">
           <TextInput
+              size='xlarge'
+              placeholder='foo@bar.com'
             onChange={e => this.onChangeEmail(e)}
           />
         </FormField>
 
         <FormField label="Username">
           <TextInput
+            size='xlarge'
+            placeholder='foo'
             onChange={e => this.onChangeNickname(e)}
           />
         </FormField>
 
         <FormField label="Password">
           <TextInput type="password"
-                     onChange={e => this.onChangePassword(e)}
+            size='xlarge'
+            placeholder='********'
+            onChange={e => this.onChangePassword(e)}
           />
         </FormField>
 
         <FormField label="Confirm password">
           <TextInput type="password"
-                     onChange={e => this.onChangeConfirmPassword(e)}
+            size='xlarge'
+            placeholder='********'
+            onChange={e => this.onChangeConfirmPassword(e)}
           />
         </FormField>
 
         <Button
           type="submit"
           label="Register"
-          primary
+          color='brand'
+          primary='true'
           onClick={() => this.register()}
         />
-        <br/><br/>
-        <Text color='status-critical'>
-          {this.getErrorText()}
-        </Text>
+      </Box>
 
-      </div>
+      <Box>
+        <Text color='status-critical'>{this.getErrorText()}</Text>
+      </Box>
+    </Box>
     );
   }
 }

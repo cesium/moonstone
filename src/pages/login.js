@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Button, FormField, Text, TextInput} from "grommet";
+import {Box, Button, FormField, Text, TextInput} from "grommet";
 import axios from 'axios';
 
 export default class Login extends Component {
@@ -54,32 +54,45 @@ export default class Login extends Component {
   };
 
   render() {
-    return <div>
-      <FormField label="Email">
-        <TextInput
-          onChange={e => this.onChangeEmail(e)}
-        />
-      </FormField>
+    return (
+      <Box
+        justify="center"
+        align="center"
+        pad="xlarge"
+        gap="medium"
+      >
+        <Box alignSelf='center'>
+          <FormField label="Email">
+            <TextInput
+              placeholder='foo@bar.com'
+              size='xlarge'
+              onChange={e => this.onChangeEmail(e)}
+            />
+          </FormField>
 
-      <FormField label="Password">
-        <TextInput type="password"
-                   onChange={e => this.onChangePassword(e)}
-        />
-      </FormField>
+          <FormField label="Password">
+            <TextInput
+              type="password"
+              placeholder='********'
+              size='xlarge'
+              onChange={e => this.onChangePassword(e)}
+            />
+          </FormField>
 
-      <Button
-        type="submit"
-        label="Login"
-        primary
-        onClick={() => this.login()}
-      />
+          <Button
+            type="submit"
+            label='Login'
+            color='brand'
+            primary='true'
+            onClick={() => this.login()}
+          />
+        </Box>
 
-      <br/><br/>
-      <Text color='status-critical'>
-        {this.getErrorText()}
-      </Text>
-
-    </div>;
+        <Box>
+          <Text color='status-critical'>{this.getErrorText()}</Text>
+        </Box>
+      </Box>
+    );
   }
 }
 
