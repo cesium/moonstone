@@ -4,9 +4,9 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 
 import registerServiceWorker from "./registerServiceWorker";
 import IndexPage from "./pages/index";
+import Layout from "./layouts/index";
 import Login from "./pages/login";
 import Register from "./pages/register";
-import Layout from "./layouts/index";
 
 import "./index.css";
 
@@ -25,4 +25,3 @@ const Root = () => (
 
 ReactDOM.render(<Root />, document.getElementById("root"));
 registerServiceWorker();
-

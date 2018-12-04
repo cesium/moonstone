@@ -1,17 +1,61 @@
-import React, { Component } from "react";
+import React, {Component} from "react";
 
-import { Link } from 'react-router-dom';
+import QRCode from "qrcode.react";
+import {Box, Text, Button, Heading, Anchor, Collapsible} from "grommet";
+import {Apps} from "grommet-icons"
 
 import "./index.css";
 
 export default class Header extends Component {
+  state = {
+    openMenu: true
+  };
+
   render() {
+    const {openMenu} = this.state;
     return (
-      <div>
-      <nav>
-        <Link to='/'>Home</Link>
-      </nav>
-    </div>
+      <Box gridArea="header" background="brand">
+        <Box direction="row" justify="between" align="center" pad={{horizontal: "medium", vertical: "small"}}>
+          <Heading level="1">Moonstone</Heading>
+          {this.props.size === "small" ?
+            <Button
+              onClick={() =>
+                this.setState({openMenu: !openMenu})
+              }
+              icon={<Apps color="light-1"/>}
+            />
+            :
+            null}
+        </Box>
+        <Collapsible direction="vertical" open={openMenu}>
+          <Box align="center" pad={{horizontal: "medium", vertical: "small"}}>
+            <QRCode renderAs="svg" value="http://seium.org"/>
+          </Box>
+          {["Badges", "Rank", "Account"].map(name => (
+            <Box pad={{horizontal: "medium", vertical: "small"}}>
+              <Anchor
+                label={
+                  <Text color="white" size="large">
+                    {name}
+                  </Text>
+                }
+              />
+            </Box>
+          ))}
+          <Box
+            alignContent="end"
+            justify="end"
+            pad={{horizontal: "medium", vertical: "small", bottom: "medium"}}
+          >
+            <Button
+              round="true"
+              label={<Text size="medium">Request Badge</Text>}
+              onClick={() => {
+              }}
+            />
+          </Box>
+        </Collapsible>
+      </Box>
     );
   }
 }
