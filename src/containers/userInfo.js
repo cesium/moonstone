@@ -35,3 +35,4 @@ export default WrappedComponent =>
       return <WrappedComponent email={state.email} />;
     }
   };
+

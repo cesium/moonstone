@@ -33,3 +33,4 @@ class IndexPage extends Component {
   }
 }
 export default userInfo(IndexPage);
+

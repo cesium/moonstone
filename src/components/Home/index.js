@@ -50,4 +50,5 @@ class Home extends Component {
   }
 }
 
-export default Header;
+export default Home;
+
