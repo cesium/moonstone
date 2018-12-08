@@ -11,6 +11,10 @@ class Header extends Component {
     openMenu: true
   };
 
+  redirectToRequest(){
+    window.location.pathname = "/request";
+  }
+
   render() {
     const { openMenu } = this.state;
     return (
@@ -56,7 +60,7 @@ class Header extends Component {
             <Button
               round="true"
               label={<Text size="medium">Request Badge</Text>}
-              onClick={() => {}}
+              onClick={this.redirectToRequest}
             />
           </Box>
         </Collapsible>
