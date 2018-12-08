@@ -18,8 +18,8 @@ export default WrappedComponent =>
 
     getUser() {
       var token = localStorage.getItem("jwt");
-      var api_endpoint = process.env.REACT_APP_ENDPOINT
-      + process.env.REACT_APP_API_USER_INFO;
+      var api_endpoint =
+        process.env.REACT_APP_ENDPOINT + process.env.REACT_APP_API_USER_INFO;
       let auth = {
         headers: {
           Authorization: "Bearer " + token
@@ -35,3 +35,4 @@ export default WrappedComponent =>
       return <WrappedComponent email={state.email} />;
     }
   };
+

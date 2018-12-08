@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 
-import "./index.css"
+import "./index.css";
 
-export default class Footer extends Component {
+class Footer extends Component {
   render() {
     return (
       <div>
@@ -11,3 +11,6 @@ export default class Footer extends Component {
     );
   }
 }
+
+export default Footer;
+
