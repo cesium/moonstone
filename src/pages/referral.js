@@ -47,12 +47,12 @@ class ReferralPage extends Component {
       process.env.REACT_APP_ENDPOINT + process.env.REACT_APP_API_REFERRALS + this.state.code;
     let config = {
       headers: {
-        'Authorization': 'Bearer ' + localStorage.jwt
+        'Authorization': 'Bearer ' + localStorage.getItem('jwt')
       }
-    }
+    };
     axios.get(api_endpoint, config)
       .then(res => this.handleCodeRequest(res))
-      .catch(res => this.handleErrorResponse(res));
+      .catch(error => this.handleErrorResponse(error));
   }
 
   render() {
@@ -73,7 +73,7 @@ class ReferralPage extends Component {
 
           <Button
             type="submit"
-            label='Request'
+            label='Claim'
             color='brand'
             primary
             onClick={this.requestCode}
