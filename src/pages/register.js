@@ -130,7 +130,7 @@ export default class Register extends Component {
           label="Register"
           color='brand'
           primary='true'
-          onClick={() => this.register()}
+          onClick={this.register}
         />
       </Box>
 

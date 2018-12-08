@@ -84,7 +84,7 @@ export default class Login extends Component {
             label='Login'
             color='brand'
             primary='true'
-            onClick={() => this.login()}
+            onClick={this.login}
           />
         </Box>
 
