@@ -1,14 +1,20 @@
 import React, { Component } from "react";
+
+import QRCode from "qrcode.react";
 import { Box, Heading, Meter } from "grommet";
 import { User, Achievement } from "grommet-icons";
 import "./index.css";
 
-class Home extends Component {
+class Account extends Component {
   render() {
     return (
       <Box full fill={true} gridArea="nav" background="light-1">
         <Box align="center" pad={{ top: "large", bottom: "medium" }}>
-          <User color="brand" size="xlarge" />
+          {this.props.size !== "small" ? (
+            <QRCode renderAs="svg" value="http://seium.org" />
+          ) : (
+            <User color="brand" size="xlarge" />
+          )}
         </Box>
         <Box align="center">
           <Heading magin="xlarge" level="2">
@@ -50,5 +56,4 @@ class Home extends Component {
   }
 }
 
-export default Home;
-
+export default Account;
