@@ -11,8 +11,8 @@ class Header extends Component {
     openMenu: true
   };
 
-  redirectToRequest(){
-    window.location.pathname = "/request";
+  redirectToReferral(){
+    window.location.pathname = "/referral";
   }
 
   render() {
@@ -59,8 +59,8 @@ class Header extends Component {
           >
             <Button
               round="true"
-              label={<Text size="medium">Request Badge</Text>}
-              onClick={this.redirectToRequest}
+              label={<Text size="medium">Redeem Code</Text>}
+              onClick={this.redirectToReferral}
             />
           </Box>
         </Collapsible>

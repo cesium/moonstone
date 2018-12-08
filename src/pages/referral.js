@@ -3,7 +3,7 @@ import {Box, Button, FormField, Text, TextInput} from "grommet";
 import axios from 'axios';
 import userInfo from "../containers/userInfo";
 
-class RequestBadgePage extends Component {
+class ReferralPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -64,7 +64,7 @@ class RequestBadgePage extends Component {
         gap="medium"
       >
         <Box alignSelf='center'>
-          <FormField label="Request Code">
+          <FormField label="Referral Code">
             <TextInput
               size='xlarge'
               onChange={e => this.onChangeCode(e)}
@@ -92,5 +92,5 @@ class RequestBadgePage extends Component {
   }
 }
 
-export default userInfo(RequestBadgePage);
+export default userInfo(ReferralPage);
 
