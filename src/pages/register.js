@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Text, Button, FormField, TextInput, Box } from "grommet";
 import axios from "axios";
 
-class Register extends Component {
+class RegisterPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -140,5 +140,5 @@ class Register extends Component {
   }
 }
 
-export default Register;
+export default RegisterPage;
 
