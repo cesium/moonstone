@@ -45,11 +45,7 @@ class ReferralPage extends Component {
   requestCode() {
     const api_endpoint =
       process.env.REACT_APP_ENDPOINT + process.env.REACT_APP_API_REFERRALS + this.state.code;
-    let config = {
-      headers: {
-        'Authorization': 'Bearer ' + localStorage.getItem('jwt')
-      }
-    };
+    let config = this.props.getAuthorization();
     axios.get(api_endpoint, config)
       .then(res => this.handleCodeRequest(res))
       .catch(error => this.handleErrorResponse(error));

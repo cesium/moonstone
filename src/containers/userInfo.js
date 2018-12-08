@@ -17,15 +17,18 @@ export default WrappedComponent =>
       this.forceUpdate();
     };
 
-    getUser() {
-      var token = localStorage.getItem("jwt");
-      var api_endpoint =
-        process.env.REACT_APP_ENDPOINT + process.env.REACT_APP_API_USER_INFO;
-      let auth = {
+    getAuthorization(){
+      return {
         headers: {
-          Authorization: "Bearer " + token
+          Authorization: "Bearer " + localStorage.getItem("jwt")
         }
       };
+    }
+
+    getUser() {
+      var api_endpoint =
+        process.env.REACT_APP_ENDPOINT + process.env.REACT_APP_API_USER_INFO;
+      let auth = this.getAuthorization();
       axios
         .get(api_endpoint, auth)
         .then(this.onResponseInfo)
@@ -33,7 +36,12 @@ export default WrappedComponent =>
     }
 
     render() {
-      return <ResponsiveLayout><WrappedComponent email={state.email} /></ResponsiveLayout>;
+      return <ResponsiveLayout>
+        <WrappedComponent
+          email={state.email}
+          getAuthorization={this.getAuthorization}
+        />
+      </ResponsiveLayout>;
     }
   };
 
