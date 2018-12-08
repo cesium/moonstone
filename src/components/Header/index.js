@@ -7,9 +7,17 @@ import { Apps, User } from "grommet-icons";
 import "./index.css";
 
 class Header extends Component {
+  constructor(props) {
+    super(props);
+    this.onClickReferral = this.onClickReferral.bind(this);
+  }
   state = {
     openMenu: true
   };
+
+  onClickReferral(){
+    window.location.pathname = "/referral";
+  }
 
   render() {
     const { openMenu } = this.state;
@@ -55,8 +63,8 @@ class Header extends Component {
           >
             <Button
               round="true"
-              label={<Text size="medium">Request Badge</Text>}
-              onClick={() => {}}
+              label={<Text size="medium">Claim Badge</Text>}
+              onClick={this.onClickReferral}
             />
           </Box>
         </Collapsible>
