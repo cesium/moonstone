@@ -1,6 +1,6 @@
 import Footer from "./Footer";
 import Header from "./Header";
-import Home from "./Home";
+import Account from "./Account";
 
-export { Footer, Header, Home };
+export { Footer, Header, Account };
 

@@ -2,7 +2,7 @@ import React, { Component } from "react";
 
 import QRCode from "qrcode.react";
 import { Box, Text, Button, Heading, Anchor, Collapsible } from "grommet";
-import { Apps } from "grommet-icons";
+import { Apps, User } from "grommet-icons";
 
 import "./index.css";
 
@@ -31,7 +31,11 @@ class Header extends Component {
         </Box>
         <Collapsible direction="vertical" open={openMenu}>
           <Box align="center" pad={{ horizontal: "medium", vertical: "small" }}>
-            <QRCode renderAs="svg" value="http://seium.org" />
+            {this.props.size === "small" ? (
+              <QRCode renderAs="svg" value="http://seium.org" />
+            ) : (
+              <User color="light-1" size="xlarge" />
+            )}
           </Box>
           {["Badges", "Rank", "Account"].map(name => (
             <Box pad={{ horizontal: "medium", vertical: "small" }}>

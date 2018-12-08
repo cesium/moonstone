@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
+import ResponsiveLayout from "../components/ResponsiveLayout";
 
 let state = {
   email: ""
@@ -32,7 +33,7 @@ export default WrappedComponent =>
     }
 
     render() {
-      return <WrappedComponent email={state.email} />;
+      return <ResponsiveLayout><WrappedComponent email={state.email} /></ResponsiveLayout>;
     }
   };
 
