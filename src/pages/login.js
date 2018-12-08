@@ -10,6 +10,7 @@ class LoginPage extends Component {
       password: "",
       error: ""
     };
+    this.login = this.login.bind(this);
   }
 
   onChangeEmail = event => {
@@ -42,7 +43,7 @@ class LoginPage extends Component {
     return this.state.error;
   }
 
-  login = () => {
+  login() {
     const api_endpoint =
       process.env.REACT_APP_ENDPOINT + process.env.REACT_APP_API_AUTH_SIGN_IN;
     axios
@@ -52,7 +53,7 @@ class LoginPage extends Component {
       })
       .then(res => this.handleLoginResponse(res))
       .catch(res => this.handleErrorResponse(res));
-  };
+  }
 
   render() {
     return (
@@ -93,4 +94,3 @@ class LoginPage extends Component {
 }
 
 export default LoginPage;
-

@@ -13,6 +13,7 @@ class RegisterPage extends Component {
       id: "",
       error: ""
     };
+    this.register = this.register.bind(this);
   }
 
   onChangeEmail = event => {
@@ -42,7 +43,6 @@ class RegisterPage extends Component {
   }
 
   handleErrorResponse(error) {
-    console.log(error);
     if (error.response) {
       // status code outside 2XX
       if (error.response.data.hasOwnProperty("error")) {
@@ -65,7 +65,7 @@ class RegisterPage extends Component {
     this.setState({ id: this.props.match.params.id });
   }
 
-  register = () => {
+  register() {
     const api_endpoint =
       process.env.REACT_APP_ENDPOINT + process.env.REACT_APP_API_AUTH_SIGN_UP;
     let data = {
@@ -83,7 +83,7 @@ class RegisterPage extends Component {
       .post(api_endpoint, data)
       .then(res => this.handleRegisterResponse(res))
       .catch(error => this.handleErrorResponse(error));
-  };
+  }
 
   render() {
     return (
@@ -141,4 +141,3 @@ class RegisterPage extends Component {
 }
 
 export default RegisterPage;
-
