@@ -8,8 +8,12 @@ import Layout from "./layouts/index";
 import LoginPage from "./pages/login";
 import RegisterPage from "./pages/register";
 import ReferralPage from "./pages/referral";
+<<<<<<< HEAD
 import BadgeDex from "./pages/badgedex";
 import Badge from "./pages/badge";
+=======
+import RankPage from "./pages/rank";
+>>>>>>> Finish leaderboard
 
 import "./index.css";
 
@@ -23,6 +27,7 @@ const Moonstone = () => (
         <Route exact path="/referral" component={ReferralPage} />
         <Route exact path="/badgedex/:id" component={Badge} />
         <Route exact path="/badgedex" component={BadgeDex} />
+        <Route exact path="/rank" component={RankPage} />
         {/* <Route component={Error404} /> */}
       </Switch>
     </BrowserRouter>
