@@ -41,6 +41,11 @@ class BadgeDex extends Component {
       .catch(error => this.handleErrorResponse(error));
   }
 
+  truncateName(name) {
+    const maxLen = 15;
+    return name.length > maxLen ? name.substring(0, maxLen) + "..." : name;
+  }
+
   render() {
     return (
       <Box
@@ -56,9 +61,9 @@ class BadgeDex extends Component {
           {
             this.state.badges.map((b, i) => (
               <Anchor key={i} href={"/badgedex/" + b.id}>
-                <Box margin="small" align="center" border="all">
+                <Box margin="small" align="center" width="small">
                   <Image width="150em" src={b.avatar} href={"/badgedex/" + b.id}/>
-                  <Text truncate={true}>{b.description}</Text>
+                  <Text>{this.truncateName(b.name)}</Text>
                 </Box>
               </Anchor>
             ))
