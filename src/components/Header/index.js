@@ -6,6 +6,21 @@ import { Apps, User } from "grommet-icons";
 
 import "./index.css";
 
+const PAGES = [
+  {
+    label: "Badges",
+    href: "/badgedex"
+  },
+  {
+    label: "Rank",
+    href: "/rank"
+  },
+  {
+    label: "Account",
+    href: "/user"
+  }
+]
+
 class Header extends Component {
   constructor(props) {
     super(props);
@@ -45,14 +60,15 @@ class Header extends Component {
               <User color="light-1" size="xlarge" />
             )}
           </Box>
-          {["Badges", "Rank", "Account"].map(name => (
-            <Box pad={{ horizontal: "medium", vertical: "small" }}>
+          {PAGES.map((page, i) => (
+            <Box key={i} pad={{ horizontal: "medium", vertical: "small" }}>
               <Anchor
                 label={
                   <Text color="white" size="large">
-                    {name}
+                    {page.label}
                   </Text>
                 }
+                href={page.href}
               />
             </Box>
           ))}
