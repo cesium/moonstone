@@ -11,6 +11,14 @@ var state = {
 };
 export default WrappedComponent =>
   class userInfo extends Component {
+    constructor(props) {
+      super(props);
+      this.state = {
+        id: "",
+        email: ""
+      };
+    }
+
     componentDidMount() {
       var token = localStorage.getItem("jwt");
       if(token !== null && state.jwt !== token) {
@@ -36,8 +44,7 @@ export default WrappedComponent =>
           Authorization: "Bearer " + token
         }
       };
-      axios
-        .get(api_endpoint, auth)
+      axios.get(api_endpoint, auth)
         .then(this.onResponseInfo)
         .catch(error => console.error(error));
     }
