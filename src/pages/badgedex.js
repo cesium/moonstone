@@ -24,8 +24,9 @@ class BadgeDex extends Component {
       && error.response.data.error === "unauthenticated")
     {
       window.location.pathname = "/login";
+    } else {
+      this.setState({ error: "Network Error" });
     }
-    this.setState({ error: "Network Error" });
   }
 
   componentDidMount() {
@@ -48,9 +49,7 @@ class BadgeDex extends Component {
 
   render() {
     return (
-      <Box
-        pad={{ horizontal: "medium", bottom: "large", top: "medium" }}
-      >
+      <Box pad={{ horizontal: "medium", bottom: "large", top: "medium" }}>
         <Heading alignSelf="center">BadgeDex</Heading>
         <Box
           pad={{ horizontal: "medium", bottom: "medium" }}

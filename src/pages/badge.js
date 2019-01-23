@@ -46,9 +46,10 @@ class Badge extends Component {
   render() {
     return this.state.error === "" ?
       (
-        <Box pad={{ horizontal: "medium", bottom: "medium", top: "medium" }} >
-          <Heading alignSelf="center">{this.state.badge.name}</Heading>
-          <Box margin="small" align="center" >
+        <Box pad={{ horizontal: "medium", bottom: "medium", top: "medium" }} gap="medium" >
+          <Heading level="1" alignSelf="center">Badge</Heading>
+          <Heading level="2" alignSelf="center">{this.state.badge.name}</Heading>
+          <Box margin="small" align="center" gap="medium">
             <Image src={this.state.badge.avatar}/>
             <Text>{this.state.badge.description}</Text>
           </Box>
