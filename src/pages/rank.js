@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Box, Table, TableBody, TableCell, TableHeader, TableRow,
-  Text } from "grommet";
+  Text, Heading } from "grommet";
 import axios from "axios";
 import userInfo from "../containers/userInfo";
 
@@ -18,17 +18,16 @@ class RankPage extends Component {
   handleLeaderBoard(users) {
     console.log(this.props);
     if (users.data.hasOwnProperty("data")) {
-      //<TableRow color={u.id === this.props.id ? "accent-2" : "accent-1"} key={i}>
       let board = users.data.data.map((u, i) => (
         <TableRow key={i}>
           <TableCell key={COLUMNS[0]}>
-              <Text>{i}</Text>
+            <Text weight={u.id === this.props.id ? "bold" : "normal"}>{i}</Text>
           </TableCell>
           <TableCell key={COLUMNS[1]}>
-            <Text>{u.nickname}</Text>
+            <Text weight={u.id === this.props.id ? "bold" : "normal"}>{u.nickname}</Text>
           </TableCell>
           <TableCell key={COLUMNS[2]}>
-            <Text>{u.badges.length}</Text>
+            <Text weight={u.id === this.props.id ? "bold" : "normal"}>{u.badges.length}</Text>
           </TableCell>
         </TableRow>
       ));
@@ -61,23 +60,26 @@ class RankPage extends Component {
 
   render() {
     return (
-      <Box justify="center" align="center" pad="xlarge" gap="medium">
-        <Table>
-          <TableHeader>
-            <TableRow>
-              {COLUMNS.map(n => (
-                <TableCell key={n} scope='col' border='bottom' >
-                  <Text>{n}</Text>
-                </TableCell>
-              ))}
-            </TableRow>
-          </TableHeader>
-          <TableBody>
-            {this.state.users}
-          </TableBody>
-        </Table>
-        <Box>
-          <Text color="status-critical">{this.state.error}</Text>
+      <Box align="center" pad="medium">
+        <Heading>Leaderboard</Heading>
+        <Box justify="center" align="center" pad="xlarge" gap="medium">
+          <Table>
+            <TableHeader>
+              <TableRow>
+                {COLUMNS.map(n => (
+                  <TableCell key={n} scope='col' border='bottom' >
+                    <Text>{n}</Text>
+                  </TableCell>
+                ))}
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              {this.state.users}
+            </TableBody>
+          </Table>
+          <Box>
+            <Text color="status-critical">{this.state.error}</Text>
+          </Box>
         </Box>
       </Box>
     );
