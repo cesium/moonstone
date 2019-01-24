@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Box, Image, Text, Heading, Anchor} from "grommet";
+import {Box, Image, Text, Heading, RoutedButton} from "grommet";
 import axios from 'axios';
 import userInfo from "../containers/userInfo";
 
@@ -59,12 +59,12 @@ class BadgeDex extends Component {
         >
           {
             this.state.badges.map((b, i) => (
-              <Anchor key={i} href={"/badgedex/" + b.id}>
+              <RoutedButton key={i} path={"/badgedex/" + b.id}>
                 <Box margin="small" align="center" width="small">
                   <Image width="150em" src={b.avatar} href={"/badgedex/" + b.id}/>
                   <Text>{this.truncateName(b.name)}</Text>
                 </Box>
-              </Anchor>
+              </RoutedButton>
             ))
           }
           <Box pad="large">

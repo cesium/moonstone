@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
-import {Box, Image, Text, Heading} from "grommet";
+import {Box, Image, Text, Heading, RoutedButton} from "grommet";
+import {FormPreviousLink} from "grommet-icons";
 import axios from 'axios';
 import userInfo from "../containers/userInfo";
 
@@ -44,25 +45,33 @@ class Badge extends Component {
   }
 
   render() {
-    return this.state.error === "" ?
-      (
-        <Box pad={{ horizontal: "medium", bottom: "medium", top: "medium" }} gap="medium" >
-          <Heading level="1" alignSelf="center">Badge</Heading>
-          <Heading level="2" alignSelf="center">{this.state.badge.name}</Heading>
-          <Box margin="small" align="center" gap="medium">
-            <Image src={this.state.badge.avatar}/>
-            <Text>{this.state.badge.description}</Text>
-          </Box>
+    return (
+      <Box>
+        {this.state.error === "" ?
+            <Box pad={{ horizontal: "medium", bottom: "medium", top: "medium" }} gap="medium">
+              <Heading level="1" alignSelf="center">Badge</Heading>
+              <Heading level="2" alignSelf="center">{this.state.badge.name}</Heading>
+              <Box margin="small" align="center" gap="medium">
+                <Image src={this.state.badge.avatar}/>
+                <Text>{this.state.badge.description}</Text>
+              </Box>
+            </Box>
+            :
+            <Box pad="large">
+              <Text color="status-critical" alignSelf="center">{this.state.error}</Text>
+            </Box>
+        }
+        <Box align="center" pad="large" round="true">
+          <RoutedButton
+            icon={<FormPreviousLink />}
+            color="brand"
+            label="Badgedex"
+            path="/badgedex"
+            primary="true"
+          />
         </Box>
-      )
-      :
-      (
-        <Box pad="large">
-          <Text color="status-critical" alignSelf="center">{this.state.error}</Text>
-        </Box>
-      );
+      </Box>);
   }
 }
-
 export default userInfo(Badge);
 
