@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Box, Table, TableBody, TableCell, TableHeader, TableRow,
-  Text, Heading } from "grommet";
+  Text, Heading, RoutedButton } from "grommet";
 import axios from "axios";
 import userInfo from "../containers/userInfo";
 
@@ -24,7 +24,9 @@ class RankPage extends Component {
             <Text weight={u.id === this.props.id ? "bold" : "normal"}>{i}</Text>
           </TableCell>
           <TableCell key={COLUMNS[1]}>
-            <Text weight={u.id === this.props.id ? "bold" : "normal"}>{u.nickname}</Text>
+            <RoutedButton path={"/user/" + u.id}>
+              <Text weight={u.id === this.props.id ? "bold" : "normal"}>{u.nickname}</Text>
+            </RoutedButton>
           </TableCell>
           <TableCell key={COLUMNS[2]}>
             <Text weight={u.id === this.props.id ? "bold" : "normal"}>{u.badges.length}</Text>
