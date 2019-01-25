@@ -1,23 +1,30 @@
 import React, { Component } from "react";
 
 import QRCode from "qrcode.react";
-import { Box, Text, Button, Heading, Anchor, Collapsible } from "grommet";
+import { Box, Text, Button, Heading, RoutedButton, Collapsible } from "grommet";
 import { Apps, User } from "grommet-icons";
 
 import "./index.css";
 
-class Header extends Component {
-  constructor(props) {
-    super(props);
-    this.onClickReferral = this.onClickReferral.bind(this);
+const PAGES = [
+  {
+    label: "Badges",
+    href: "/badgedex"
+  },
+  {
+    label: "Rank",
+    href: "/rank"
+  },
+  {
+    label: "Account",
+    href: "/user"
   }
+]
+
+class Header extends Component {
   state = {
     openMenu: true
   };
-
-  onClickReferral(){
-    window.location.pathname = "/referral";
-  }
 
   render() {
     const { openMenu } = this.state;
@@ -29,7 +36,9 @@ class Header extends Component {
           align="center"
           pad={{ horizontal: "medium", vertical: "small" }}
         >
-          <Heading level="1">Moonstone</Heading>
+          <RoutedButton path="/">
+            <Heading level="1">Moonstone</Heading>
+          </RoutedButton>
           {this.props.size === "small" ? (
             <Button
               onClick={() => this.setState({ openMenu: !openMenu })}
@@ -45,15 +54,11 @@ class Header extends Component {
               <User color="light-1" size="xlarge" />
             )}
           </Box>
-          {["Badges", "Rank", "Account"].map(name => (
-            <Box pad={{ horizontal: "medium", vertical: "small" }}>
-              <Anchor
-                label={
-                  <Text color="white" size="large">
-                    {name}
-                  </Text>
-                }
-              />
+          {PAGES.map((page, i) => (
+            <Box key={i} pad={{ horizontal: "medium", vertical: "small" }}>
+              <RoutedButton path={page.href}>
+                <Text color="white" size="large">{page.label}</Text>
+              </RoutedButton>
             </Box>
           ))}
           <Box
@@ -61,10 +66,10 @@ class Header extends Component {
             justify="end"
             pad={{ horizontal: "medium", vertical: "small", bottom: "medium" }}
           >
-            <Button
+            <RoutedButton
               round="true"
               label={<Text size="medium">Claim Badge</Text>}
-              onClick={this.onClickReferral}
+              path="/referral"
             />
           </Box>
         </Collapsible>
