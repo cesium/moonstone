@@ -20,7 +20,7 @@ class Account extends Component {
           <Heading magin="xlarge" level="2">
             Username
           </Heading>
-          <Heading level="3">{this.props.email}</Heading>
+          <Heading level="3">{this.props.user.email}</Heading>
         </Box>
         <Box align="center" basis="xsmall" pad={{ vertical: "medium" }}>
           <Meter
