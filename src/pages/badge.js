@@ -30,7 +30,6 @@ class Badge extends Component {
   }
 
   componentDidMount() {
-    console.log(this.props)
     let id = this.props.match.params.id;
     const api_endpoint =
       process.env.REACT_APP_ENDPOINT + process.env.REACT_APP_API_BADGES + "/" + id;

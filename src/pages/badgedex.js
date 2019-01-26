@@ -30,7 +30,7 @@ class BadgeDex extends Component {
       const api_endpoint =
         process.env.REACT_APP_ENDPOINT
         + process.env.REACT_APP_API_ATTENDEES
-        + "cf22f17a-0131-464c-84f7-7b0737979609"; //TODO: Change this
+        + this.props.user.id;
       let config = {
         headers: {
           'Authorization': 'Bearer ' + localStorage.getItem('jwt')
