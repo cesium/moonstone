@@ -29,8 +29,8 @@ class BadgeDex extends Component {
     if (res.data.hasOwnProperty("data")) {
       const api_endpoint =
         process.env.REACT_APP_ENDPOINT
-        + process.env.REACT_APP_API_USERS
-        + "cf22f17a-0131-464c-84f7-7b0737979609";
+        + process.env.REACT_APP_API_ATTENDEES
+        + "cf22f17a-0131-464c-84f7-7b0737979609"; //TODO: Change this
       let config = {
         headers: {
           'Authorization': 'Bearer ' + localStorage.getItem('jwt')
@@ -83,10 +83,13 @@ class BadgeDex extends Component {
                 <Box
                   align="center"
                   width="small"
-                  background={b.collected ? "brand" : ""}
                 >
                   <Text>{"#" + ('000' + b.id).slice(-3)}</Text>
-                  <Image width="150em" src={b.avatar} href={"/badgedex/" + b.id}/>
+                  <Image
+                    style={{opacity: b.collected ? 1 : 0.2}}
+                    width="150em"
+                    src={b.avatar}
+                  />
                   <Text>{this.truncateName(b.name)}</Text>
                 </Box>
               </RoutedButton>
