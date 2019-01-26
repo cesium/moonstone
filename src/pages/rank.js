@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Box, Table, TableBody, TableCell, TableHeader, TableRow,
-  Text, Heading, RoutedButton } from "grommet";
+  Text, Heading, RoutedButton, InfiniteScroll } from "grommet";
 import axios from "axios";
 import userInfo from "../containers/userInfo";
 
@@ -17,22 +17,10 @@ class RankPage extends Component {
 
   handleLeaderBoard(users) {
     if (users.data.hasOwnProperty("data")) {
-      let board = users.data.data.map((u, i) => (
-        <TableRow key={i}>
-          <TableCell key={COLUMNS[0]}>
-            <Text weight={u.id === this.props.id ? "bold" : "normal"}>{i}</Text>
-          </TableCell>
-          <TableCell key={COLUMNS[1]}>
-            <RoutedButton path={"/user/" + u.id}>
-              <Text weight={u.id === this.props.id ? "bold" : "normal"}>{u.nickname}</Text>
-            </RoutedButton>
-          </TableCell>
-          <TableCell key={COLUMNS[2]}>
-            <Text weight={u.id === this.props.id ? "bold" : "normal"}>{u.badges.length}</Text>
-          </TableCell>
-        </TableRow>
-      ));
-      this.setState({users: board});
+      var user_v =
+        [...Array(100).keys()].map((i) => {return {id: i, nickname: i, badges: [...Array(i).keys()]}});
+      // this.setState({users: users.data.data});
+      this.setState({users: user_v, error: ""});
     }
   }
 
@@ -62,8 +50,10 @@ class RankPage extends Component {
   render() {
     return (
       <Box align="center" pad="medium">
-        <Heading>Leaderboard</Heading>
-        <Box justify="center" align="center" pad="xlarge" gap="medium">
+        <Box>
+          <Heading>Leaderboard</Heading>
+        </Box>
+        <Box justify="center" align="center" pad="xlarge">
           <Table>
             <TableHeader>
               <TableRow>
@@ -75,7 +65,23 @@ class RankPage extends Component {
               </TableRow>
             </TableHeader>
             <TableBody>
-              {this.state.users}
+              <InfiniteScroll items={this.state.users} step={20}>
+                {(u, i) => (
+                  <TableRow key={i}>
+                    <TableCell key={COLUMNS[0]}>
+                      <Text weight={u.id === this.props.id ? "bold" : "normal"}>{i}</Text>
+                    </TableCell>
+                    <TableCell key={COLUMNS[1]}>
+                      <RoutedButton path={"/user/" + u.id}>
+                        <Text weight={u.id === this.props.id ? "bold" : "normal"}>{u.nickname}</Text>
+                      </RoutedButton>
+                    </TableCell>
+                    <TableCell key={COLUMNS[2]}>
+                      <Text weight={u.id === this.props.id ? "bold" : "normal"}>{u.badges.length}</Text>
+                    </TableCell>
+                  </TableRow>
+                )}
+              </InfiniteScroll>
             </TableBody>
           </Table>
           <Box>
