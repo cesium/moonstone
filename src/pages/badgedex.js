@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Box, Image, Text, Heading, RoutedButton} from "grommet";
+import {Box, Image, Text, Heading, RoutedButton, InfiniteScroll} from "grommet";
 import axios from 'axios';
 import userInfo from "../containers/userInfo";
 
@@ -49,7 +49,7 @@ class BadgeDex extends Component {
 
   render() {
     return (
-      <Box pad={{ horizontal: "medium", bottom: "large", top: "medium" }}>
+      <Box pad={{ horizontal: "medium", bottom: "large", top: "medium" }} gap="medium">
         <Heading alignSelf="center">BadgeDex</Heading>
         <Box
           pad={{ horizontal: "medium", bottom: "medium" }}
@@ -57,16 +57,16 @@ class BadgeDex extends Component {
           direction="row"
           wrap="true"
         >
-          {
-            this.state.badges.map((b, i) => (
+          <InfiniteScroll items={this.state.badges} step={30} >
+            {(b, i) => (
               <RoutedButton key={i} path={"/badgedex/" + b.id}>
                 <Box margin="small" align="center" width="small">
                   <Image width="150em" src={b.avatar} href={"/badgedex/" + b.id}/>
                   <Text>{this.truncateName(b.name)}</Text>
                 </Box>
               </RoutedButton>
-            ))
-          }
+            )}
+          </InfiniteScroll>
           <Box pad="large">
             <Text color="status-critical">{this.state.error}</Text>
           </Box>
