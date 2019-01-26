@@ -16,7 +16,6 @@ class RankPage extends Component {
   }
 
   handleLeaderBoard(users) {
-    console.log(this.props);
     if (users.data.hasOwnProperty("data")) {
       let board = users.data.data.map((u, i) => (
         <TableRow key={i}>

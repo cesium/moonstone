@@ -11,14 +11,6 @@ var state = {
 };
 export default WrappedComponent =>
   class userInfo extends Component {
-    constructor(props) {
-      super(props);
-      this.state = {
-        id: "",
-        email: ""
-      };
-    }
-
     componentDidMount() {
       var token = localStorage.getItem("jwt");
       if(token !== null && state.jwt !== token) {
