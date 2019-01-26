@@ -12,23 +12,6 @@ class BadgeDex extends Component {
     };
   }
 
-  handleBadgesResponse(res) {
-    if (res.data.hasOwnProperty("data")) {
-      this.setState({badges: res.data.data, error: ""});
-    }
-  }
-
-  handleErrorResponse(error) {
-    if (error.response
-      && error.response.data.hasOwnProperty("error")
-      && error.response.data.error === "unauthenticated")
-    {
-      window.location.pathname = "/login";
-    } else {
-      this.setState({ error: "Network Error" });
-    }
-  }
-
   componentDidMount() {
     const api_endpoint =
       process.env.REACT_APP_ENDPOINT + process.env.REACT_APP_API_BADGES;
@@ -38,8 +21,45 @@ class BadgeDex extends Component {
       }
     };
     axios.get(api_endpoint, config)
-      .then(res => this.handleBadgesResponse(res))
-      .catch(error => this.handleErrorResponse(error));
+      .then(res => this.handleBadges(res))
+      .catch(error => this.handleError(error));
+  }
+
+  handleBadges(res) {
+    if (res.data.hasOwnProperty("data")) {
+      const api_endpoint =
+        process.env.REACT_APP_ENDPOINT
+        + process.env.REACT_APP_API_USERS
+        + "cf22f17a-0131-464c-84f7-7b0737979609";
+      let config = {
+        headers: {
+          'Authorization': 'Bearer ' + localStorage.getItem('jwt')
+        }
+      };
+      axios.get(api_endpoint, config)
+        .then(response => this.handleUserBadges(res.data.data, response))
+        .catch(error => this.handleError(error));
+    }
+  }
+
+  handleUserBadges(badges, res) {
+    if(res.data.hasOwnProperty("data")) {
+      let collected = res.data.data.badges.map(b => b.id);
+      badges.forEach(b => b.collected = collected.indexOf(b.id) !== -1);
+      badges.sort((a, b) => a.id - b.id);
+      this.setState({badges: badges, error: ""});
+    }
+  }
+
+  handleError(error) {
+    if (error.response
+      && error.response.data.hasOwnProperty("error")
+      && error.response.data.error === "unauthenticated")
+    {
+      window.location.pathname = "/login";
+    } else {
+      this.setState({ error: "Network Error" });
+    }
   }
 
   truncateName(name) {
@@ -60,7 +80,12 @@ class BadgeDex extends Component {
           <InfiniteScroll items={this.state.badges} step={30} >
             {(b, i) => (
               <RoutedButton key={i} path={"/badgedex/" + b.id}>
-                <Box margin="small" align="center" width="small">
+                <Box
+                  align="center"
+                  width="small"
+                  background={b.collected ? "brand" : ""}
+                >
+                  <Text>{"#" + ('000' + b.id).slice(-3)}</Text>
                   <Image width="150em" src={b.avatar} href={"/badgedex/" + b.id}/>
                   <Text>{this.truncateName(b.name)}</Text>
                 </Box>
