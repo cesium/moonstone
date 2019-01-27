@@ -42,7 +42,7 @@ export default WrappedComponent =>
     }
 
     render() {
-      return <ResponsiveLayout>
+      return <ResponsiveLayout user={state}>
         <WrappedComponent user={state} match={this.props.match}/>
       </ResponsiveLayout>;
     }
