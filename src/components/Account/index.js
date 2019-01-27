@@ -13,7 +13,7 @@ class Account extends Component {
           {this.props.size !== "small" ? (
             <QRCode
               renderAs="svg"
-              value={"http://intra.seium.org/user/" + this.props.user.id}
+              value={"https://intra.seium.org/user/" + this.props.user.id}
             />
           ) : (
             <Image src={this.props.user.avatar} />
