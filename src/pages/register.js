@@ -127,7 +127,7 @@ class RegisterPage extends Component {
             type="submit"
             label="Register"
             color="brand"
-            primary="true"
+            primary={true}
             onClick={this.register}
           />
         </Box>

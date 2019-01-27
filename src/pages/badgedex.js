@@ -62,7 +62,8 @@ class BadgeDex extends Component {
   handleError(error) {
     if (error.response
       && error.response.data.hasOwnProperty("error")
-      && error.response.data.error === "unauthenticated")
+      && (error.response.data.error === "unauthenticated"
+        || error.response.data.error === "invalid_token"))
     {
       window.location.pathname = "/login";
     } else {
@@ -83,7 +84,7 @@ class BadgeDex extends Component {
           pad={{ horizontal: "medium", bottom: "medium" }}
           justify="start"
           direction="row"
-          wrap="true"
+          wrap={true}
         >
           <InfiniteScroll items={this.state.badges} step={30} >
             {(b, i) => (
