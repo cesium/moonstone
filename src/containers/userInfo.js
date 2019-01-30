@@ -43,7 +43,11 @@ export default WrappedComponent =>
 
     render() {
       return <ResponsiveLayout user={state}>
-        <WrappedComponent user={state} match={this.props.match}/>
+        <WrappedComponent
+          user={state}
+          match={this.props.match}
+          reloadUser={() => this.getUser(state.jwt)}
+        />
       </ResponsiveLayout>;
     }
   };
