@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
-import {Box, Image, Text, Heading, RoutedButton} from "grommet";
-import {FormPreviousLink} from "grommet-icons";
+import {Box, Image, Text, Heading} from "grommet";
 import axios from 'axios';
 import userInfo from "../containers/userInfo";
 

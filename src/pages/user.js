@@ -12,7 +12,53 @@ class User extends Component {
     };
   }
 
-  handleBadgesResponse(res) {
+  // Check if is register
+  componentDidMount() {
+    const api_endpoint =
+      process.env.REACT_APP_ENDPOINT
+      + process.env.REACT_APP_API_IS_REGISTERED
+      + this.props.match.params.id;
+    let config = {
+      headers: {
+        'Authorization': 'Bearer ' + localStorage.getItem('jwt')
+      }
+    };
+    axios.get(api_endpoint, config)
+      .then(res => this.handleRegisterCheck(res))
+      .catch(error => this.handleRegisterCheckError(error));
+  }
+
+  handleRegisterCheck(res) {
+    if (res.data.hasOwnProperty("is_registered")) {
+      if(res.data.is_registered) {
+        this.getUser();
+      } else {
+        window.location.pathname = "/register/" + this.props.match.params.id;
+      }
+    }
+  }
+
+  handleRegisterCheckError(error) {
+    this.setState({ error: "Network Error" });
+  }
+
+  // Get the user if is registered
+  getUser() {
+    const api_endpoint =
+      process.env.REACT_APP_ENDPOINT
+      + process.env.REACT_APP_API_ATTENDEES
+      + this.props.match.params.id;
+    let config = {
+      headers: {
+        'Authorization': 'Bearer ' + localStorage.getItem('jwt')
+      }
+    };
+    axios.get(api_endpoint, config)
+      .then(res => this.handleUserResponse(res))
+      .catch(error => this.handleErrorResponse(error));
+  }
+
+  handleUserResponse(res) {
     if (res.data.hasOwnProperty("data")) {
       this.setState({user: res.data.data, error: ""});
     }
@@ -27,21 +73,6 @@ class User extends Component {
       window.location.pathname = "/login";
     }
     this.setState({ error: "Network Error" });
-  }
-
-  componentDidMount() {
-    const api_endpoint =
-      process.env.REACT_APP_ENDPOINT
-      + process.env.REACT_APP_API_ATTENDEES
-      + this.props.match.params.id;
-    let config = {
-      headers: {
-        'Authorization': 'Bearer ' + localStorage.getItem('jwt')
-      }
-    };
-    axios.get(api_endpoint, config)
-      .then(res => this.handleBadgesResponse(res))
-      .catch(error => this.handleErrorResponse(error));
   }
 
   truncateName(name) {
