@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 
 import QRCode from "qrcode.react";
-import { Box, Heading, Meter } from "grommet";
-import { User, Achievement } from "grommet-icons";
+import { Box, Heading, Meter, Image } from "grommet";
+import { Achievement } from "grommet-icons";
 import "./index.css";
 
 class Account extends Component {
@@ -11,14 +11,17 @@ class Account extends Component {
       <Box full fill={true} gridArea="nav" background="light-1">
         <Box align="center" pad={{ top: "large", bottom: "medium" }}>
           {this.props.size !== "small" ? (
-            <QRCode renderAs="svg" value="http://seium.org" />
+            <QRCode
+              renderAs="svg"
+              value={"https://intra.seium.org/user/" + this.props.user.id}
+            />
           ) : (
-            <User color="brand" size="xlarge" />
+            <Image src={this.props.user.avatar} />
           )}
         </Box>
         <Box align="center">
           <Heading magin="xlarge" level="2">
-            Username
+            {this.props.user.nickname}
           </Heading>
           <Heading level="3">{this.props.user.email}</Heading>
         </Box>
