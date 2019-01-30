@@ -36,8 +36,7 @@ export default WrappedComponent =>
           Authorization: "Bearer " + token
         }
       };
-      axios
-        .get(api_endpoint, auth)
+      axios.get(api_endpoint, auth)
         .then(this.onResponseInfo)
         .catch(error => console.error(error));
     }
