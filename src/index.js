@@ -12,6 +12,8 @@ import BadgeDex from "./pages/badgedex";
 import Badge from "./pages/badge";
 import RankPage from "./pages/rank";
 import NoMatch from "./pages/404.js";
+import User from "./pages/user.js"
+import Profile from "./pages/profile.js"
 
 import "./index.css";
 
@@ -26,6 +28,8 @@ const Moonstone = () => (
         <Route exact path="/badgedex/:id" component={Badge} />
         <Route exact path="/badgedex" component={BadgeDex} />
         <Route exact path="/rank" component={RankPage} />
+        <Route exact path="/user" component={Profile} />
+        <Route exact path="/user/:id" component={User} />
         <Route component={NoMatch} />
       </Switch>
     </BrowserRouter>

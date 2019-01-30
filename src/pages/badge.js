@@ -62,15 +62,6 @@ class Badge extends Component {
               <Text color="status-critical" alignSelf="center">{this.state.error}</Text>
             </Box>
         }
-        <Box align="center" pad="large" round="true">
-          <RoutedButton
-            icon={<FormPreviousLink />}
-            color="brand"
-            label="Badgedex"
-            path="/badgedex"
-            primary="true"
-          />
-        </Box>
       </Box>);
   }
 }
