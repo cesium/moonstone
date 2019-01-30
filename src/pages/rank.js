@@ -18,7 +18,7 @@ class RankPage extends Component {
   handleLeaderBoard(users) {
     if (users.data.hasOwnProperty("data")) {
       var user_v =
-        [...Array(100).keys()].map((i) => {
+        [...Array(10).keys()].map((i) => {
           return {
             avatar: "https://2.bp.blogspot.com/-idlCM_H6-00/TrnjtM-UnNI/AAAAAAAAAEA/lAN8BNO-nhM/s1600/Blue_mana.png",
             id: i,
@@ -27,7 +27,7 @@ class RankPage extends Component {
           }
         });
       this.setState({users: users.data.data, error: ""});
-      this.setState({users: user_v, error: ""});
+      // this.setState({users: user_v, error: ""});
     }
   }
 
@@ -55,6 +55,31 @@ class RankPage extends Component {
   }
 
   render() {
+    var id = this.props.user.id ;
+    function user(u) {
+      return u.id === id ;
+    }
+    var rank = this.state.users.findIndex(user);
+    var myUser = this.state.users[rank];
+    let showRank;
+    if(rank > 9) {
+      showRank = <TableRow key={rank}>
+        <TableCell key={COLUMNS[0]} verticalAlign="middle">
+          <Image style={{height: 25}} src={myUser.avatar} />
+        </TableCell>
+        <TableCell key={COLUMNS[1]}>
+          <Text weight="bold">{rank+1}</Text>
+        </TableCell>
+        <TableCell key={COLUMNS[2]}>
+          <RoutedButton path={"/user/" + myUser.id}>
+            <Text weight="bold">{myUser.nickname}</Text>
+          </RoutedButton>
+        </TableCell>
+        <TableCell key={COLUMNS[3]}>
+          <Text weight="bold">{myUser.badges}</Text>
+        </TableCell>
+      </TableRow>;
+    }
     return (
       <Box align="center" pad="medium">
         <Box>
@@ -72,8 +97,7 @@ class RankPage extends Component {
               </TableRow>
             </TableHeader>
             <TableBody>
-              <InfiniteScroll items={this.state.users} step={20}>
-                {(u, i) => {
+                { this.state.users.slice(0, 10).map((u, i) => {
                   let weight = u.id === this.props.user.id ? "bold" : "normal";
                   return (
                     <TableRow key={i}>
@@ -81,7 +105,7 @@ class RankPage extends Component {
                         <Image style={{height: 25}} src={u.avatar} />
                       </TableCell>
                       <TableCell key={COLUMNS[1]}>
-                        <Text weight={weight}>{i}</Text>
+                        <Text weight={weight}>{i+1}</Text>
                       </TableCell>
                       <TableCell key={COLUMNS[2]}>
                         <RoutedButton path={"/user/" + u.id}>
@@ -92,8 +116,8 @@ class RankPage extends Component {
                         <Text weight={weight}>{u.badges}</Text>
                       </TableCell>
                     </TableRow>
-                  );}}
-                </InfiniteScroll>
+                  );})}
+                  {showRank}
               </TableBody>
             </Table>
             <Box>
