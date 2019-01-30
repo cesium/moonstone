@@ -17,17 +17,7 @@ class RankPage extends Component {
 
   handleLeaderBoard(users) {
     if (users.data.hasOwnProperty("data")) {
-      var user_v =
-        [...Array(10).keys()].map((i) => {
-          return {
-            avatar: "https://2.bp.blogspot.com/-idlCM_H6-00/TrnjtM-UnNI/AAAAAAAAAEA/lAN8BNO-nhM/s1600/Blue_mana.png",
-            id: i,
-            nickname: i,
-            badges: 100 - i
-          }
-        });
       this.setState({users: users.data.data, error: ""});
-      // this.setState({users: user_v, error: ""});
     }
   }
 
@@ -97,7 +87,7 @@ class RankPage extends Component {
               </TableRow>
             </TableHeader>
             <TableBody>
-                { this.state.users.slice(0, 10).map((u, i) => {
+                {this.state.users.slice(0, 10).map((u, i) => {
                   let weight = u.id === this.props.user.id ? "bold" : "normal";
                   return (
                     <TableRow key={i}>
