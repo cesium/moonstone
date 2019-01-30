@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Box, Table, TableBody, TableCell, TableHeader, TableRow,
-  Text, Heading, RoutedButton, InfiniteScroll, Image } from "grommet";
+  Text, Heading, RoutedButton, Image } from "grommet";
 import axios from "axios";
 import userInfo from "../containers/userInfo";
 
@@ -46,10 +46,7 @@ class RankPage extends Component {
 
   render() {
     var id = this.props.user.id ;
-    function user(u) {
-      return u.id === id ;
-    }
-    var rank = this.state.users.findIndex(user);
+    var rank = this.state.users.findIndex(user => user.id === id);
     var myUser = this.state.users[rank];
     let showRank;
     if(rank > 9) {
