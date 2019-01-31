@@ -3,6 +3,8 @@ import {Box, Image, Text, Heading, RoutedButton, InfiniteScroll} from "grommet";
 import axios from 'axios';
 import userInfo from "../containers/userInfo";
 
+import "../index.css";
+
 class BadgeDex extends Component {
   constructor(props) {
     super(props);
@@ -69,7 +71,7 @@ class BadgeDex extends Component {
 
   render() {
     return (
-      <Box pad={{ horizontal: "medium", bottom: "large", top: "medium" }} gap="medium">
+      <Box className="content" pad={{ horizontal: "medium", bottom: "large", top: "medium" }} gap="medium">
         <Heading alignSelf="center">BadgeDex</Heading>
         <Box
           pad={{ horizontal: "medium", bottom: "medium" }}

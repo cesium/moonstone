@@ -1,0 +1,42 @@
+.sideBar {
+  width: 15%;
+  padding-top: 20px;
+  height: 100%;
+  position: absolute;
+  border-right: 2px solid #03191e;
+  background-image: url("light-stuff.png");
+  z-index: 1;
+}
+
+.sideBar span {
+  font-size: 15px;
+  padding: 10px;
+  border-radius: 10px;
+  display: inline-block;
+  width: 170px;
+}
+
+.sideBar svg {
+  padding-top: 3px;
+}
+
+.textDiv {
+  height: 55px;
+}
+
+.sideBarText {
+  font-size: 15px;
+}
+
+.sideBarHome {
+  font-size: 25px;
+  font-weight: 700;
+  padding: 10px;
+  border-radius: 10px;
+  display: inline-block;
+  width: 130px;
+}
+
+.sideBar span:hover {
+  background-color: #03191e;
+}

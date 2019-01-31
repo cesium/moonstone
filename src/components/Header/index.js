@@ -3,25 +3,31 @@ import React, { Component } from "react";
 import QRCode from "qrcode.react";
 import { Box, Text, Button, Heading, RoutedButton, Collapsible, Image } from "grommet";
 import { Apps } from "grommet-icons";
+import { FaAlignJustify, FaUser, FaFlagCheckered } from 'react-icons/fa';
+import { GoListUnordered, GoDiffAdded } from 'react-icons/go'
 
 import "./index.css";
 
 const PAGES = [
   {
     label: "Badges",
-    href: "/badgedex"
+    href: "/badgedex",
+    fa: <GoListUnordered />
   },
   {
     label: "Rank",
-    href: "/rank"
+    href: "/rank",
+    fa: <FaFlagCheckered />
   },
   {
     label: "Account",
-    href: "/user"
+    href: "/user",
+    fa: <FaUser />
   },
   {
     label: "Claim Badge",
-    href: "/referral"
+    href: "/referral",
+    fa: <GoDiffAdded />
   }
 ]
 
@@ -34,7 +40,7 @@ class Header extends Component {
     const { openMenu } = this.state;
     const loggedIn = localStorage.getItem("jwt") !== null;
     return (
-      <Box gridArea="header" background="brand">
+      <Box gridArea="header" background="brand" className="sideBar">
         <Box
           direction="row"
           justify="between"
@@ -42,7 +48,7 @@ class Header extends Component {
           pad={{ horizontal: "medium", vertical: "small" }}
         >
           <RoutedButton path="/">
-            <Heading level="1">Moonstone</Heading>
+            <Text className="sideBarHome"><FaAlignJustify /> Home</Text>
           </RoutedButton>
           {this.props.size === "small" && loggedIn ? (
             <Button
@@ -64,9 +70,9 @@ class Header extends Component {
                 )}
               </Box>
               {PAGES.map((page, i) => (
-                <Box key={i} pad={{ horizontal: "medium", vertical: "small" }}>
+                <Box className="textDiv" key={i} pad={{ horizontal: "medium", vertical: "small" }}>
                   <RoutedButton path={page.href}>
-                    <Text color="white" size="large">{page.label}</Text>
+                    <Text color="white" size="large">{page.fa} {page.label}</Text>
                   </RoutedButton>
                 </Box>
               ))}
