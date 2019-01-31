@@ -9,3 +9,10 @@ body {
   position: absolute;
   padding-left: 25%;
 }
+
+@media (max-width: 1024px) {
+  .content {
+    width: 100%;
+    padding-left: 0;
+  }
+}

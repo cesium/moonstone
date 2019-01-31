@@ -1,27 +1,49 @@
 .sideBar {
-  width: 15%;
-  padding-top: 20px;
+  width: 220px;
   height: 100%;
-  position: absolute;
+  min-height: 600px;
+  position: fixed;
   border-right: 2px solid #03191e;
   background-image: url("light-stuff.png");
   z-index: 1;
+  padding-top: 15px;
 }
 
 .sideBar span {
   font-size: 15px;
-  padding: 10px;
   border-radius: 10px;
   display: inline-block;
-  width: 170px;
+  width: 200px;
+  padding: 13px 0 13px 0;
+}
+
+.sideBar span:hover {
+  padding: 0;
+}
+
+.sideBar span:hover:before {
+  content: "";
+  display: block;
+  margin: 0 auto auto 0;
+  width: 55%;
+  padding-bottom: 10px;
+  border-top: 3px solid white;
+  padding-top: 0;
+}
+
+.sideBar span:hover:after {
+  content: "";
+  display: block;
+  margin-left: 50px;
+  width: 55%;
+  padding-top: 10px;
+  border-bottom: 3px solid white;
 }
 
 .sideBar svg {
-  padding-top: 3px;
 }
 
 .textDiv {
-  height: 55px;
 }
 
 .sideBarText {
@@ -29,14 +51,54 @@
 }
 
 .sideBarHome {
-  font-size: 25px;
   font-weight: 700;
-  padding: 10px;
-  border-radius: 10px;
-  display: inline-block;
-  width: 130px;
 }
 
-.sideBar span:hover {
-  background-color: #03191e;
+.copyright {
+  font-size: 11px;
+  position: absolute;
+  bottom: 10px;
+  padding-left: 22%;
+  width: 200%;
+}
+
+.logo {
+  font-size: 11px;
+  position: absolute;
+  bottom: 10px;
+  height: 110px;
+}
+
+.sideBarLinkShow {
+  display:none;
+}
+
+.sideBarLinkHide {
+  display:none;
+}
+
+@media (max-width: 1024px) {
+  .sideBar {
+    display:none;
+  }
+
+  .sideBarLinkShow {
+    display: block;
+    background-image: url("light-stuff.png");
+    padding: 5px;
+    position: fixed;
+    width: 30px;
+    height: 30px;
+    z-index: 2;
+  }
+
+  .sideBarLinkHide {
+    display: none;
+    background-image: url("light-stuff.png");
+    padding: 5px 0 0 190px;
+    position: fixed;
+    width: 30px;
+    height: 30px;
+    z-index: 2;
+  }
 }
