@@ -22,11 +22,6 @@ const PAGES = [
     fa: <FaFlagCheckered />
   },
   {
-    label: "Account",
-    href: "/user",
-    fa: <FaUser />
-  },
-  {
     label: "Claim Badge",
     href: "/referral",
     fa: <GoDiffAdded />
