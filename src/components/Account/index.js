@@ -2,14 +2,13 @@ import React, { Component } from 'react';
 import {Box, Image, Text, Heading, RoutedButton, InfiniteScroll, FormField,
   Button, TextInput} from "grommet";
 import axios from 'axios';
-import ImageUpload from "../ImageUpload/index.js";
 import {Edit, Checkmark} from "grommet-icons";
 import QRCode from "qrcode.react";
 import { Achievement } from "grommet-icons";
 import "./index.css";
 import UserData from '../../services/userData.js'
 import FormData from 'form-data';
-import fs from 'fs';
+import attendee_missing from '../../images/default/avatar-missing.png';
 
 class Account extends Component {
   constructor(props) {
@@ -19,8 +18,9 @@ class Account extends Component {
       error: "",
       edit_username: false,
       new_username: "",
-      edit_avatar: false
-    }
+      edit_avatar: false,
+      avatar_error: ""
+    };
     this.swapEditUsername = this.swapEditUsername.bind(this);
     this.swapEditAvatar = this.swapEditAvatar.bind(this);
     this.editUsername = this.editUsername.bind(this);
@@ -90,6 +90,10 @@ class Account extends Component {
   }
 
   handleImageChange(event) {
+    if(event.target.files[0].size > 1000000) {
+      this.setState({avatar_error: "Image too large, maximum file size: 1Mb"});
+      return;
+    }
     const api_endpoint =
       process.env.REACT_APP_ENDPOINT
       + process.env.REACT_APP_API_ATTENDEES
@@ -117,7 +121,7 @@ class Account extends Component {
 
   render() {
     let avatar = this.state.user.avatar.includes("missing") ?
-      "" : this.state.user.avatar;
+      attendee_missing : this.state.user.avatar;
     return (
       <Box
         full fill={true}
