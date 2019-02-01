@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {Box, Image, Text, Heading, RoutedButton, InfiniteScroll} from "grommet";
 import axios from 'axios';
 import userInfo from "../containers/userInfo";
-
+import UserData from "../services/userData.js";
 import "../index.css";
 
 class BadgeDex extends Component {
@@ -29,18 +29,24 @@ class BadgeDex extends Component {
 
   handleBadges(res) {
     if (res.data.hasOwnProperty("data")) {
-      const api_endpoint =
-        process.env.REACT_APP_ENDPOINT
-        + process.env.REACT_APP_API_ATTENDEES
-        + this.props.user.id;
-      let config = {
-        headers: {
-          'Authorization': 'Bearer ' + localStorage.getItem('jwt')
-        }
-      };
-      axios.get(api_endpoint, config)
-        .then(response => this.handleUserBadges(res.data.data, response))
-        .catch(error => this.handleError(error));
+      this.setState({badges: res.data.data});
+      UserData.prototype.getId()
+        .then(id => {
+          const api_endpoint =
+            process.env.REACT_APP_ENDPOINT
+            + process.env.REACT_APP_API_ATTENDEES
+            + id;
+          let config = {
+            headers: {
+              'Authorization': 'Bearer ' + localStorage.getItem('jwt')
+            }
+          };
+          console.log("yay");
+          axios.get(api_endpoint, config)
+            .then(response => this.handleUserBadges(res.data.data, response))
+            .catch(error => this.handleError(error));
+        })
+        .catch(e => this.handleError(e));
     }
   }
 

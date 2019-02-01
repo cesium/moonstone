@@ -3,6 +3,7 @@ import { Box, Table, TableBody, TableCell, TableHeader, TableRow,
   Text, Heading, RoutedButton, Image } from "grommet";
 import axios from "axios";
 import userInfo from "../containers/userInfo";
+import UserData from "../services/userData.js";
 
 const COLUMNS = ["Avatar", "Rank", "Name", "Badges"];
 
@@ -11,6 +12,7 @@ class RankPage extends Component {
     super(props);
     this.state = {
       users: [],
+      id: "",
       error: ""
     };
   }
@@ -42,10 +44,15 @@ class RankPage extends Component {
     axios.get(api_endpoint, config)
       .then(res => this.handleLeaderBoard(res))
       .catch(error => this.handleError(error));
+    UserData.prototype.getId()
+      .then(id => {
+        this.setState({id: id});
+      })
+      .catch(error => this.handleError(error));
   }
 
   render() {
-    var id = this.props.user.id ;
+    var id = this.state.id ;
     var rank = this.state.users.findIndex(user => user.id === id);
     var myUser = this.state.users[rank];
     let showRank;
@@ -85,7 +92,7 @@ class RankPage extends Component {
             </TableHeader>
             <TableBody>
                 {this.state.users.slice(0, 10).map((u, i) => {
-                  let weight = u.id === this.props.user.id ? "bold" : "normal";
+                  let weight = u.id === this.state.id ? "bold" : "normal";
                   return (
                     <TableRow key={i}>
                       <TableCell key={COLUMNS[0]} verticalAlign="middle">
