@@ -4,6 +4,7 @@ import { Box, Table, TableBody, TableCell, TableHeader, TableRow,
 import axios from "axios";
 import userInfo from "../containers/userInfo";
 import UserData from "../services/userData.js";
+import attendee_missing from "../images/default/avatar-missing.png";
 
 const COLUMNS = ["Avatar", "Rank", "Name", "Badges"];
 
@@ -57,9 +58,10 @@ class RankPage extends Component {
     var myUser = this.state.users[rank];
     let showRank;
     if(rank > 9) {
+      const avatar = myUser.avatar.includes("missing") ? attendee_missing : myUser.avatar;
       showRank = <TableRow key={rank}>
         <TableCell key={COLUMNS[0]} verticalAlign="middle">
-          <Image style={{height: 25}} src={myUser.avatar} />
+          <Image style={{height: 25}} src={avatar} />
         </TableCell>
         <TableCell key={COLUMNS[1]}>
           <Text weight="bold">{rank+1}</Text>
@@ -93,10 +95,11 @@ class RankPage extends Component {
             <TableBody>
                 {this.state.users.slice(0, 10).map((u, i) => {
                   let weight = u.id === this.state.id ? "bold" : "normal";
+                  const avatar = u.avatar.includes("missing") ? attendee_missing : u.avatar;
                   return (
                     <TableRow key={i}>
                       <TableCell key={COLUMNS[0]} verticalAlign="middle">
-                        <Image style={{height: 25}} src={u.avatar} />
+                        <Image style={{height: 25}} src={avatar} />
                       </TableCell>
                       <TableCell key={COLUMNS[1]}>
                         <Text weight={weight}>{i+1}</Text>
