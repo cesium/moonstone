@@ -57,7 +57,7 @@ class ReferralPage extends Component {
 
   render() {
     return (
-      <Box
+      <Box className="content"
         justify="center"
         align="center"
         pad="xlarge"

@@ -4,6 +4,8 @@ import {FormPreviousLink} from "grommet-icons";
 import axios from 'axios';
 import userInfo from "../containers/userInfo";
 
+import "../index.css";
+
 class Badge extends Component {
   constructor(props) {
     super(props);
@@ -45,7 +47,7 @@ class Badge extends Component {
 
   render() {
     return (
-      <Box>
+      <Box className="content">
         {this.state.error === "" ?
             <Box pad={{ horizontal: "medium", bottom: "medium", top: "medium" }} gap="medium">
               <Heading level="1" alignSelf="center">Badge</Heading>

@@ -68,7 +68,7 @@ class RankPage extends Component {
       </TableRow>;
     }
     return (
-      <Box align="center" pad="medium">
+      <Box className="content" align="center" pad="medium">
         <Box>
           <Heading>Leaderboard</Heading>
         </Box>

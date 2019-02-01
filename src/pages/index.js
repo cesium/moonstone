@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import { Account, Welcome } from "../components";
 import userInfo from "../containers/userInfo";
 
+import "../index.css";
+
 class IndexPage extends Component {
   render() {
     if(localStorage.getItem("jwt")){
