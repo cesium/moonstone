@@ -1,0 +1,4 @@
+[context.branch-deploy.environment]
+  REACT_APP_ENDPOINT = "http://sei19-safira.herokuapp.com"
+[context.deploy-preview.environment]
+  REACT_APP_ENDPOINT = "http://sei19-safira.herokuapp.com"
