@@ -11,6 +11,7 @@ import ReferralPage from "./pages/referral";
 import BadgeDex from "./pages/badgedex";
 import Badge from "./pages/badge";
 import RankPage from "./pages/rank";
+import NoMatch from "./pages/404.js";
 
 import "./index.css";
 
@@ -25,7 +26,7 @@ const Moonstone = () => (
         <Route exact path="/badgedex/:id" component={Badge} />
         <Route exact path="/badgedex" component={BadgeDex} />
         <Route exact path="/rank" component={RankPage} />
-        {/* <Route component={Error404} /> */}
+        <Route component={NoMatch} />
       </Switch>
     </BrowserRouter>
   </Layout>
