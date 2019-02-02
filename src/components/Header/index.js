@@ -20,11 +20,6 @@ const PAGES = [
     fa: <Trophy color='white'/>
   },
   {
-    label: "Account",
-    href: "/user",
-    fa: <User color='white'/>
-  },
-  {
     label: "Claim Badge",
     href: "/referral",
     fa: <AddCircle color='white'/>
