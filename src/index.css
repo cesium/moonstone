@@ -3,16 +3,3 @@ body {
   padding: 0;
   font-family: sans-serif;
 }
-
-.content {
-  width: 85%;
-  position: absolute;
-  padding-left: 25%;
-}
-
-@media (max-width: 1024px) {
-  .content {
-    width: 100%;
-    padding-left: 0;
-  }
-}

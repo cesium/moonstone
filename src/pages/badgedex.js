@@ -80,7 +80,7 @@ class BadgeDex extends Component {
 
   render() {
     return (
-      <Box className="content" pad={{ horizontal: "medium", bottom: "large", top: "medium" }} gap="medium">
+      <Box pad={{ horizontal: "medium", bottom: "large", top: "medium" }} gap="medium">
         <Heading alignSelf="center">BadgeDex</Heading>
         <Box
           pad={{ horizontal: "medium", bottom: "medium" }}

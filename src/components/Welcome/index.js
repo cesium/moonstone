@@ -6,7 +6,7 @@ import "./index.css";
 class Welcome extends Component {
   render() {
     return (
-      <Box className="content" full fill={true} gridArea="nav" background="light-1">
+      <Box full fill={true} gridArea="nav" background="light-1">
         <Box align="center" height="medium" pad={{ top: "large", bottom: "medium" }}>
           <Image
             height="small"

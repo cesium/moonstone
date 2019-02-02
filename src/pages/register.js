@@ -87,7 +87,7 @@ class RegisterPage extends Component {
 
   render() {
     return (
-      <Box className="content" justify="center" align="center" pad="xlarge" gap="medium">
+      <Box justify="center" align="center" pad="xlarge" gap="medium">
         <Box alignSelf="center">
           <FormField label="Email">
             <TextInput
