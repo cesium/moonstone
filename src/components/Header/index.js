@@ -113,7 +113,7 @@ class Header extends Component {
 
   render() {
     const loggedIn = localStorage.getItem("jwt") !== null;
-    var avatar = "";
+    let avatar = "";
     if(loggedIn) {
       avatar = this.state.user.avatar && this.state.user.avatar.includes("missing") ?
         attendee_missing : this.state.user.avatar;
@@ -126,7 +126,7 @@ class Header extends Component {
               <Box pad={{top: "large"}} >
                 <QRCode
                   renderAs="svg"
-                  value={process.env.REACT_APP_BASE_URL + "user/" + this.props.user.id}
+                  value={process.env.REACT_APP_BASE_URL + "user/" + this.state.user.id}
                 />
               </Box>
             ) : (
