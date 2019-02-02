@@ -1,12 +1,11 @@
-<h1 align="center"> Moonstone </h1>
+[netlify]: https://app.netlify.com/sites/sei-moonstone/deploys
+[semaphoreci]: https://semaphoreci.com/cesiuminho/moonstone
 
-<p align="center">
-    <code>A gem isn't complete without another</code>
-</p>
+# Moonstone
+> A gem isn't complete without another
 
-<p align="center">
-    <a href="https://semaphoreci.com/cesiuminho/moonstone"><img src="https://semaphoreci.com/api/v1/cesiuminho/moonstone/branches/master/badge.svg" alt="Semaphore Status"></a>
-</p>
+[![Netlify Status](https://api.netlify.com/api/v1/badges/943f4cac-75a3-4e85-856b-31603364a8a1/deploy-status)][netlify]
+[![Semaphore CI](https://semaphoreci.com/api/v1/cesiuminho/moonstone/branches/master/badge.svg)][semaphoreci]
 
 ## About Moonstone
 
