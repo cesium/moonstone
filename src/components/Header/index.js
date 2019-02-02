@@ -47,9 +47,9 @@ class HorizontalCollapsible extends Component {
           align="center"
           pad={{ vertical: "small", horizontal: "medium" }}
           justify="between"
-          background={{image: "url(https://seium.org/assets/backgrounds/light-stuff.png)"}}
           elevation="large"
           style={{ zIndex: "1000" }}
+          className="seiBackground"
         >
           <Button href="/">
             <Image width="100" height="50" src={require('./moonstone-logo.png')} />
@@ -62,9 +62,8 @@ class HorizontalCollapsible extends Component {
         <Box flex direction="row">
           <Collapsible className="fullHeight" direction="vertical" open={openNotification}>
             <Box
-              className="fullHeight"
+              className="fullHeight seiBackground"
               width="xlarge"
-              background={{image: "url(https://seium.org/assets/backgrounds/light-stuff.png)"}}
               pad="small"
               elevation="small"
             >
@@ -127,7 +126,7 @@ class Header extends Component {
               <Box pad={{top: "large"}} >
                 <QRCode
                   renderAs="svg"
-                  value={"https://intra.seium.org/user/" + this.props.user.id}
+                  value={process.env.REACT_APP_API_URL + "user/" + this.props.user.id}
                 />
               </Box>
             ) : (

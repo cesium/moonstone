@@ -37,7 +37,7 @@
   border-bottom: 3px solid white;
 }
 
-.topBar {
+.topBar, .seiBackground {
   background-image: url("light-stuff.png");
 }
 
