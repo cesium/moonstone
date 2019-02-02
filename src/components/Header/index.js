@@ -109,10 +109,12 @@ class Header extends Component {
       <Box>
           <Box align="center" pad={{ horizontal: "medium", bottom: "large" }}>
             {this.props.size === "small" ? (
-              <QRCode
-                renderAs="svg"
-                value={"https://intra.seium.org/user/" + this.props.user.id}
-              />
+              <Box pad={{top: "large"}} >
+                <QRCode
+                  renderAs="svg"
+                  value={"https://intra.seium.org/user/" + this.props.user.id}
+                />
+              </Box>
             ) : (
               <Box>
                 <Button href="/" pad={{bottom: "large" }}>
