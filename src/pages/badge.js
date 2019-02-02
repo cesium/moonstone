@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
-import {Box, Image, Text, Heading, RoutedButton} from "grommet";
-import {FormPreviousLink} from "grommet-icons";
+import {Box, Image, Text, Heading} from "grommet";
 import axios from 'axios';
 import userInfo from "../containers/userInfo";
+import badge_missing from "../images/default/badge-missing.png";
 
 import "../index.css";
 
@@ -46,6 +46,8 @@ class Badge extends Component {
   }
 
   render() {
+    const avatar = this.state.badge.avatar && this.state.badge.avatar.includes("missing") ?
+      badge_missing : this.state.badge.avatar;
     return (
       <Box className="content">
         {this.state.error === "" ?
@@ -53,7 +55,7 @@ class Badge extends Component {
               <Heading level="1" alignSelf="center">Badge</Heading>
               <Heading level="2" alignSelf="center">{this.state.badge.name}</Heading>
               <Box margin="small" align="center" gap="medium">
-                <Image src={this.state.badge.avatar}/>
+                <Image src={avatar}/>
                 <Text>{this.state.badge.description}</Text>
               </Box>
             </Box>
@@ -62,15 +64,6 @@ class Badge extends Component {
               <Text color="status-critical" alignSelf="center">{this.state.error}</Text>
             </Box>
         }
-        <Box align="center" pad="large" round="true">
-          <RoutedButton
-            icon={<FormPreviousLink />}
-            color="brand"
-            label="Badgedex"
-            path="/badgedex"
-            primary="true"
-          />
-        </Box>
       </Box>);
   }
 }

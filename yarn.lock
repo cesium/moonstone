@@ -1941,11 +1941,6 @@ console-control-strings@^1.0.0, console-control-strings@~1.1.0:
   resolved "https://registry.yarnpkg.com/console-control-strings/-/console-control-strings-1.1.0.tgz#3d7cf4464db6446ea644bf4b39507f9851008e8e"
   integrity sha1-PXz0Rk22RG6mRL9LOVB/mFEAjo4=
 
-"consolidated-events@^1.1.0 || ^2.0.0":
-  version "2.0.2"
-  resolved "https://registry.yarnpkg.com/consolidated-events/-/consolidated-events-2.0.2.tgz#da8d8f8c2b232831413d9e190dc11669c79f4a91"
-  integrity sha512-2/uRVMdRypf5z/TW/ncD/66l75P5hH2vM/GR8Jf8HLc2xnfJtmina6F6du8+v4Z2vTrMo7jC+W1tmEEuuELgkQ==
-
 constants-browserify@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/constants-browserify/-/constants-browserify-1.0.0.tgz#c20b96d8c617748aaf1c16021760cd27fcb8cb75"
@@ -3602,22 +3597,32 @@ grommet-controls@0.90.9:
     text-mask-addons "^3.7.2"
     text-mask-core "^5.0.1"
 
-grommet-icons@3.2.0:
-  version "3.2.0"
-  resolved "https://registry.yarnpkg.com/grommet-icons/-/grommet-icons-3.2.0.tgz#a2996c59177d93da14db52301551a9dad90dec69"
-  integrity sha512-D4YBzq0VWF+rU3ynviR0EVBCqmobJxqI8+dmgpG+HKOSDyKuUOxTvD91Esb0wcRfTZwX1NVCbhjLak3CGStl9g==
+grommet-icons@4.1.0, grommet-icons@^4.0.0:
+  version "4.1.0"
+  resolved "https://registry.yarnpkg.com/grommet-icons/-/grommet-icons-4.1.0.tgz#4705d2828461348ff38ddd2c42b8cd551e0569a0"
+  integrity sha512-S9TqY4R/J/xG6++xNXa5JoQeZ9/jO8b6FgmDOhHAD8Vdx/btPswp2hUliTdQiFZFxne4ILldQoCK0w1xwN9eSA==
+  dependencies:
+    grommet-styles "^0.2.0"
 
-grommet@2.0.1:
-  version "2.0.1"
-  resolved "https://registry.yarnpkg.com/grommet/-/grommet-2.0.1.tgz#0dffaca4e9226baa65cdf12fcb7d7525fda83906"
-  integrity sha512-py2Ipw/E/mGmWxdHvL7rfFPCSP36oUtZzdDUDLSfOrbT8OvgF+Ul0G/K8DQWjFu3wzDsHbBABstAGP5ljyvhtQ==
+grommet-styles@^0.2.0:
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/grommet-styles/-/grommet-styles-0.2.0.tgz#b2eac2b7e2747cb523434d21728ce5234f8ce4f4"
+  integrity sha512-0OMSYuGeyifYKpg4Gv2HzL8rUdd0ddnJ5LbCBKgDuloC71XIwr9g/Fxa6rs737MbPV7OZ4pEm4wvrjH4epzf1A==
+
+grommet@2.3.1:
+  version "2.3.1"
+  resolved "https://registry.yarnpkg.com/grommet/-/grommet-2.3.1.tgz#18b00e50ed6ceeecbe133f843ffd52881922bc80"
+  integrity sha512-HgadVH6wNPXe/sw+10jIWSUF2WziMNl4iWm6Kv4sznsxfLNp/WonbxXn5igeJ3d+p8QcfX/8WgLUtpIVKcBC/w==
   dependencies:
     css "^2.2.3"
+    grommet-icons "^4.0.0"
+    grommet-styles "^0.2.0"
+    hoist-non-react-statics "^3.2.0"
     markdown-to-jsx "^6.6.6"
+    mobile-detect "^1.4.3"
     polished "^2.2.0"
     prop-types "^15.5.10"
-    react-desc "^3.6.5"
-    react-waypoint "^8.0.1"
+    react-desc "^4.1.2"
     recompose "^0.30.0"
 
 growly@^1.3.0:
@@ -3776,6 +3781,13 @@ hoist-non-react-statics@^2.3.1, hoist-non-react-statics@^2.5.0:
   version "2.5.5"
   resolved "https://registry.yarnpkg.com/hoist-non-react-statics/-/hoist-non-react-statics-2.5.5.tgz#c5903cf409c0dfd908f388e619d86b9c1174cb47"
   integrity sha512-rqcy4pJo55FTTLWt+bU8ukscqHeE/e9KWvsOW2b/a3afxQZhwkQdT1rPPCJ0rYXdj4vNcasY8zHTH+jF/qStxw==
+
+hoist-non-react-statics@^3.2.0:
+  version "3.3.0"
+  resolved "https://registry.yarnpkg.com/hoist-non-react-statics/-/hoist-non-react-statics-3.3.0.tgz#b09178f0122184fb95acf525daaecb4d8f45958b"
+  integrity sha512-0XsbTXxgiaCDYDIWFcwkmerZPSwywfUqYmwT4jzewKTQSWoE6FCMoUVOeBJWK3E/CrWbxRG3m5GzY4lnIwGRBA==
+  dependencies:
+    react-is "^16.7.0"
 
 home-or-tmp@^2.0.0:
   version "2.0.0"
@@ -5371,6 +5383,11 @@ mkdirp@0.5.1, mkdirp@0.5.x, mkdirp@^0.5.0, mkdirp@^0.5.1, mkdirp@~0.5.0, mkdirp@
   dependencies:
     minimist "0.0.8"
 
+mobile-detect@^1.4.3:
+  version "1.4.3"
+  resolved "https://registry.yarnpkg.com/mobile-detect/-/mobile-detect-1.4.3.tgz#e436a3839f5807dd4d3cd4e081f7d3a51ffda2dd"
+  integrity sha512-UaahPNLllQsstHOEHAmVnTHCMQrAS9eL5Qgdi50QrYz6UgGk+Xziz2udz2GN6NYcyODcPLnasC7a7s6R2DjiaQ==
+
 moment@^2.10.2:
   version "2.22.2"
   resolved "https://registry.yarnpkg.com/moment/-/moment-2.22.2.tgz#3c257f9839fc0e93ff53149632239eb90783ff66"
@@ -6435,7 +6452,7 @@ promise@^7.1.1:
   dependencies:
     asap "~2.0.3"
 
-prop-types@^15.0.0, prop-types@^15.5.10, prop-types@^15.5.4, prop-types@^15.5.8, prop-types@^15.6.0, prop-types@^15.6.1, prop-types@^15.6.2:
+prop-types@^15.5.10, prop-types@^15.5.4, prop-types@^15.5.8, prop-types@^15.6.0, prop-types@^15.6.1, prop-types@^15.6.2:
   version "15.6.2"
   resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.6.2.tgz#05d5ca77b4453e985d60fc7ff8c859094a497102"
   integrity sha512-3pboPvLiWD7dkI3qf3KbUe6hKFKa52w+AE0VCqECtf+QHAKgOL37tTaNCnuX1nAAQ4ZhyP+kYVKf8rLmJ/feDQ==
@@ -6603,10 +6620,15 @@ react-chartjs-2@^2.7.4:
     lodash "^4.17.4"
     prop-types "^15.5.8"
 
-react-desc@^3.5.0, react-desc@^3.6.5:
+react-desc@^3.5.0:
   version "3.6.5"
   resolved "https://registry.yarnpkg.com/react-desc/-/react-desc-3.6.5.tgz#d6cd8a4b4fd726dbc8f94eac326a7e4dcb118777"
   integrity sha512-fI3JbWRQdRmQ3pBFscULdmJnKceSgK5Ug6BdFS/G/+9/6hle16sOQYEeELIu053uhhSuwK59aBex0UaeTJWnpw==
+
+react-desc@^4.1.2:
+  version "4.1.2"
+  resolved "https://registry.yarnpkg.com/react-desc/-/react-desc-4.1.2.tgz#83fc4ede66b2d45ae4ef63c18421474d55972966"
+  integrity sha512-JAVe89uaLr0HZ0IKodnpTPNgNyJ/SPDQnl3VJPVwI+SpebmHvJiBNZEOwX201QmSbsVGqRY8ql/VFPlAx85WzA==
 
 react-dev-utils@^5.0.1:
   version "5.0.3"
@@ -6657,10 +6679,20 @@ react-helmet@^5.2.0:
     prop-types "^15.5.4"
     react-side-effect "^1.1.0"
 
-react-is@^16.6.0, react-is@^16.6.3:
+react-icons@^3.3.0:
+  version "3.3.0"
+  resolved "https://registry.yarnpkg.com/react-icons/-/react-icons-3.3.0.tgz#09409cad23c39149e419af5c928eee6f9f456b93"
+  integrity sha512-OY8yBAyww1VEro12Zbt6dZqz77zN7LXukC4oA4i4fWjxTjCbbqsPy6BrfAh7BYPtIRaTXhpoYlhdoDaT/kxdog==
+
+react-is@^16.6.0:
   version "16.6.3"
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.6.3.tgz#d2d7462fcfcbe6ec0da56ad69047e47e56e7eac0"
   integrity sha512-u7FDWtthB4rWibG/+mFbVd5FvdI20yde86qKGx4lVUTWmPlSWQ4QxbBIrrs+HnXGbxOUlUzTAP/VDmvCwaP2yA==
+
+react-is@^16.7.0:
+  version "16.7.0"
+  resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.7.0.tgz#c1bd21c64f1f1364c6f70695ec02d69392f41bfa"
+  integrity sha512-Z0VRQdF4NPDoI0tsXVMLkJLiwEBa+RP66g0xDHxgxysxSoCUccSten4RTF/UFvZF1dZvZ9Zu1sx+MDXwcOR34g==
 
 react-lifecycles-compat@^3.0.2:
   version "3.0.4"
@@ -6745,15 +6777,6 @@ react-side-effect@^1.1.0:
   dependencies:
     exenv "^1.2.1"
     shallowequal "^1.0.1"
-
-react-waypoint@^8.0.1:
-  version "8.1.0"
-  resolved "https://registry.yarnpkg.com/react-waypoint/-/react-waypoint-8.1.0.tgz#91d926a2fd1be4cbd0351cb8c3d494fac0ef1699"
-  integrity sha512-HoOItWTHObgz7bstmz9p3wuTVDRdsyNspnkAOFz9eE4z8LRj1bbNP9Nzye2k9zsFiujlz8lmp13UFmuXPWXPYw==
-  dependencies:
-    consolidated-events "^1.1.0 || ^2.0.0"
-    prop-types "^15.0.0"
-    react-is "^16.6.3"
 
 react@^16.4.1:
   version "16.6.3"
