@@ -117,9 +117,9 @@ class Header extends Component {
               </Box>
             ) : (
               <Box>
-                <Button href="/" pad={{bottom: "large" }}>
+                <RoutedButton path={"/"} pad={{bottom: "large" }}>
                   <Image width="150" height="80" src={require('./moonstone-logo.png')} />
-                </Button>
+                </RoutedButton>
                 <Button>
                   <Image width="150" height="150" src={loggedIn ? avatar : ""} />
                 </Button>
