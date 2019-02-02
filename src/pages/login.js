@@ -80,7 +80,7 @@ class LoginPage extends Component {
             type="submit"
             label="Login"
             color="brand"
-            primary="true"
+            primary={true}
             onClick={this.login}
           />
         </Box>
