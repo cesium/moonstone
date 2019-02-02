@@ -4,8 +4,33 @@ import QRCode from "qrcode.react";
 import { Box, Heading, Meter, Image } from "grommet";
 import { Achievement } from "grommet-icons";
 import "./index.css";
+import UserData from '../../services/userData.js'
 
 class Account extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      user: {},
+      error: ""
+    }
+  }
+
+  handleError(error) {
+    if (error.response
+      && error.response.data.hasOwnProperty("error")
+      && error.response.data.error === "unauthenticated")
+    {
+      window.location.pathname = "/login";
+    }
+    this.setState({ error: "Network Error" });
+  }
+
+  componentDidMount() {
+    UserData.prototype.getUser()
+      .then(user => this.setState({user: user, error: ""}))
+      .catch(e => this.handleError(e));
+  }
+
   render() {
     return (
       <Box full fill={true} gridArea="nav" background="light-1">
@@ -13,17 +38,17 @@ class Account extends Component {
           {this.props.size !== "small" ? (
             <QRCode
               renderAs="svg"
-              value={"https://intra.seium.org/user/" + this.props.user.id}
+              value={"https://intra.seium.org/user/" + this.state.user.id}
             />
           ) : (
-            <Image src={this.props.user.avatar} />
+            <Image src={this.state.user.avatar} />
           )}
         </Box>
         <Box align="center">
           <Heading magin="xlarge" level="2">
-            {this.props.user.nickname}
+            {this.state.user.nickname}
           </Heading>
-          <Heading level="3">{this.props.user.email}</Heading>
+          <Heading level="3">{this.state.user.email}</Heading>
         </Box>
         <Box align="center" basis="xsmall" pad={{ vertical: "medium" }}>
           <Meter
@@ -48,7 +73,7 @@ class Account extends Component {
           justify="center"
           direction="row"
         >
-          {[...Array(10).keys()].map(() => (
+          {[...Array(10).keys()].map((i) => (
             <Box direction="row" basis="xxsmall" align="center">
               <Achievement />
             </Box>

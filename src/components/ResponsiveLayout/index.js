@@ -20,7 +20,7 @@ class ResponsiveLayout extends Component {
                 { name: "nav", start: [1, 0], end: [1, 0] }
               ]}
             >
-              <Header user={this.props.user} size={size} />
+              <Header size={size} />
               {React.Children.map(this.props.children, child =>
                 React.cloneElement(child, {
                   size: size
@@ -29,7 +29,7 @@ class ResponsiveLayout extends Component {
             </Grid>
           ) : (
             <Box>
-              <Header user={this.props.user} size={size} />
+              <Header size={size} />
               {React.Children.map(this.props.children, child =>
                 React.cloneElement(child, {
                   size: size

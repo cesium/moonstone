@@ -7,7 +7,7 @@ import "../index.css";
 class IndexPage extends Component {
   render() {
     if(localStorage.getItem("jwt")){
-      return <Account size={this.props.size} user={this.props.user} />;
+      return <Account size={this.props.size} />;
     } else {
       return <Welcome size={this.props.size} />
     }

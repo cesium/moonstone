@@ -5,6 +5,7 @@ import { Box, Text, Button, Heading, RoutedButton, Collapsible, Image } from "gr
 import { Apps } from "grommet-icons";
 import { FaAlignJustify, FaUser, FaFlagCheckered, FaHeart, FaAngleDoubleLeft, FaAngleDoubleRight} from 'react-icons/fa';
 import { GoListUnordered, GoDiffAdded } from 'react-icons/go'
+import UserData from "../../services/userData.js"
 
 import "./index.css";
 import moonstone from "./moonstone-logo.png";
@@ -33,9 +34,19 @@ const PAGES = [
 ]
 
 class Header extends Component {
-  state = {
-    openMenu: this.props.size !== "small"
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      openMenu: this.props.size !== "small",
+      user: {}
+    };
+  }
+
+  componentDidMount() {
+    UserData.prototype.getUser()
+      .then(user => this.setState({user: user}))
+      .catch(e => {});
+  }
 
   static hideAndShow(e) {
     e.preventDefault();
@@ -88,10 +99,10 @@ class Header extends Component {
                     {this.props.size === "small" ? (
                       <QRCode
                         renderAs="svg"
-                        value={"https://intra.seium.org/user/" + this.props.user.id}
+                        value={"https://intra.seium.org/user/" + this.state.user.id}
                       />
                     ) : (
-                      <Image src={loggedIn ? this.props.user.avatar : ""} />
+                      <Image src={loggedIn ? this.state.user.avatar : ""} />
                     )}
                   </Box>
                   {PAGES.map((page, i) => (
