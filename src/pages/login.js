@@ -17,18 +17,10 @@ class LoginPage extends Component {
     return (
       <Box background="light-1" fill="vertical">
         <Box
-          // justify="center"
-          // align="center"
-          // alignContent="center"
-          // background="light-1"
-          // gap="medium"
-
           margin={{ left: "medium", right:"medium", top: "medium", bottom: "small" }}
         >
           <Welcome size="small" openLogin={this.openLogin} />
-          <Collapsible direction="vertical" open={isLogin}>
-            <Login />
-          </Collapsible>
+          <Login />
         </Box>
       </Box>
     );
