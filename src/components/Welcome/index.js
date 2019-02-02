@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-import { Box, Heading, RoutedButton, Image } from "grommet";
+import { Box, Image } from "grommet";
 import "./index.css";
 import logo from "../../pages/logo.png";
 

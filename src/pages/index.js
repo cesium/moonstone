@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Account, Welcome } from "../components";
+import { Account } from "../components";
 import userInfo from "../containers/userInfo";
 
 import "../index.css";
