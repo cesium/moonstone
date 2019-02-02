@@ -14,10 +14,8 @@ class LoginPage extends Component {
   render() {
     return (
       <Box background="light-1" fill="vertical">
-        <Box
-          margin={{ left: "medium", right:"medium", top: "medium", bottom: "small" }}
-        >
-          <Welcome size="small" openLogin={this.openLogin} />
+        <Box margin={{ left: "medium", right:"medium", top: "medium", bottom: "small" }}>
+          <Welcome size="small"/>
           <Login />
         </Box>
       </Box>
