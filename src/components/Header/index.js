@@ -94,7 +94,22 @@ class Header extends Component {
   getUser() {
     UserData.prototype.getUser()
       .then(user => this.setState({user: user}))
-      .catch(e => {});
+      .catch(e => {
+      });
+  }
+
+  renderEntries(paddingBottom) {
+    return (
+      <Box>
+        {PAGES.map((page, i) => (
+          <Box key={i} pad={{horizontal: "large", bottom: paddingBottom}}>
+            <RoutedButton path={page.href}>
+              <Text color="white" size="large">{page.fa} {page.label}</Text>
+            </RoutedButton>
+          </Box>
+        ))}
+      </Box>
+    )
   }
 
   render() {
@@ -107,7 +122,7 @@ class Header extends Component {
 
     const content = (
       <Box>
-          <Box align="center" pad={{ horizontal: "medium", bottom: "large" }}>
+          <Box align="center" pad={{ horizontal: "small", bottom: "medium" }}>
             {this.props.size === "small" ? (
               <Box pad={{top: "large"}} >
                 <QRCode
@@ -117,8 +132,8 @@ class Header extends Component {
               </Box>
             ) : (
               <Box>
-                <RoutedButton path={"/"} pad={{bottom: "large" }}>
-                  <Image width="150" height="80" src={require('./moonstone-logo.png')} />
+                <RoutedButton path={"/"} pad={{ bottom: "medium" }}>
+                  <Image width="250" height="130" src={require('./moonstone-logo.png')} />
                 </RoutedButton>
                 <Button>
                   <Image width="150" height="150" src={loggedIn ? avatar : ""} />
@@ -126,13 +141,15 @@ class Header extends Component {
               </Box>
             )}
           </Box>
-          {PAGES.map((page, i) => (
-            <Box key={i} pad={{ horizontal: "large", bottom: "large" }}>
-              <RoutedButton path={page.href}>
-                <Text color="white" size="large">{page.fa} {page.label}</Text>
-              </RoutedButton>
+          {this.props.size === "small" ?
+            <Box>
+              {this.renderEntries("large")}
             </Box>
-          ))}
+            :
+            <Box>
+              {this.renderEntries("xsmall")}
+            </Box>
+          }
           {loggedIn ?
             <Box
               alignContent="end"
