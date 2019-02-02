@@ -34,9 +34,9 @@ class UserData {
   }
 
   async fetchUser() {
-    if(localStorage.getItem("jwt") === null) return false;
-    if(state.user !== null && localStorage.getItem("jwt") === state.jwt) return true;
-    await this.fetchUserForce();
+    if(localStorage.getItem("jwt") === null) throw {response: {data: {error: "unauthenticated"}}};
+    if(state.user === null || localStorage.getItem("jwt") !== state.jwt)
+      await this.fetchUserForce();
   }
 
   onResponseInfo(response)  {

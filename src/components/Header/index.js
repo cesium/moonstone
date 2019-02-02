@@ -68,8 +68,11 @@ class Header extends Component {
   render() {
     const { openMenu } = this.state;
     const loggedIn = localStorage.getItem("jwt") !== null;
-    let avatar = this.state.user.avatar && this.state.user.avatar.includes("missing") ?
-      attendee_missing : this.state.user.avatar;
+    var avatar = "";
+    if(loggedIn) {
+      avatar = this.state.user.avatar && this.state.user.avatar.includes("missing") ?
+        attendee_missing : this.state.user.avatar;
+    }
     return (
       <Box>
           <Box gridArea="header" onClick={Header.hideAndShow} background="brand" className="sideBarLinkShow">
