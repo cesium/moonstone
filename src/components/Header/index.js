@@ -38,9 +38,14 @@ class Header extends Component {
   }
 
   componentDidMount() {
+    this.getUser();
+  }
+
+  getUser() {
     UserData.prototype.getUser()
       .then(user => this.setState({user: user}))
       .catch(e => {});
+    UserData.prototype.subscribeToStateChange(() => this.getUser());
   }
 
   static hideAndShow(e) {

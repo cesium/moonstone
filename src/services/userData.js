@@ -4,6 +4,7 @@ import axios from "axios";
 var state = {
   jwt: "",
   user: null,
+  subscriptions: [],
 }
 
 class UserData {
@@ -40,6 +41,7 @@ class UserData {
 
   onResponseInfo(response)  {
     state.user = response.data;
+    state.subscriptions.forEach(f => f());
   };
 
   async fetchUserForce() {
@@ -52,6 +54,10 @@ class UserData {
       }
     };
     this.onResponseInfo(await axios.get(api_endpoint, auth));
+  }
+
+  subscribeToStateChange(func) {
+    state.subscriptions.push(func);
   }
 }
 
