@@ -6,9 +6,9 @@ import { Apps } from "grommet-icons";
 import { FaAlignJustify, FaUser, FaFlagCheckered, FaHeart, FaAngleDoubleLeft, FaAngleDoubleRight} from 'react-icons/fa';
 import { GoListUnordered, GoDiffAdded } from 'react-icons/go'
 import UserData from "../../services/userData.js"
-
 import "./index.css";
 import moonstone from "./moonstone-logo.png";
+import attendee_missing from '../../images/default/avatar-missing.png';
 
 const PAGES = [
   {
@@ -20,11 +20,6 @@ const PAGES = [
     label: "Rank",
     href: "/rank",
     fa: <FaFlagCheckered />
-  },
-  {
-    label: "Account",
-    href: "/user",
-    fa: <FaUser />
   },
   {
     label: "Claim Badge",
@@ -43,9 +38,14 @@ class Header extends Component {
   }
 
   componentDidMount() {
+    this.getUser();
+  }
+
+  getUser() {
     UserData.prototype.getUser()
       .then(user => this.setState({user: user}))
       .catch(e => {});
+    UserData.prototype.subscribeToStateChange(() => this.getUser());
   }
 
   static hideAndShow(e) {
@@ -68,6 +68,8 @@ class Header extends Component {
   render() {
     const { openMenu } = this.state;
     const loggedIn = localStorage.getItem("jwt") !== null;
+    let avatar = this.state.user.avatar && this.state.user.avatar.includes("missing") ?
+      attendee_missing : this.state.user.avatar;
     return (
       <Box>
           <Box gridArea="header" onClick={Header.hideAndShow} background="brand" className="sideBarLinkShow">
@@ -99,10 +101,10 @@ class Header extends Component {
                     {this.props.size === "small" ? (
                       <QRCode
                         renderAs="svg"
-                        value={"https://intra.seium.org/user/" + this.state.user.id}
+                        value={"https://moonstone.seium.org/user/" + this.state.user.id}
                       />
                     ) : (
-                      <Image src={loggedIn ? this.state.user.avatar : ""} />
+                      <Image src={loggedIn ? avatar : ""} />
                     )}
                   </Box>
                   {PAGES.map((page, i) => (

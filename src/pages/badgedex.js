@@ -3,6 +3,8 @@ import {Box, Image, Text, Heading, RoutedButton, InfiniteScroll} from "grommet";
 import axios from 'axios';
 import userInfo from "../containers/userInfo";
 import UserData from "../services/userData.js";
+import badge_missing from "../images/default/badge-missing.png";
+
 import "../index.css";
 
 class BadgeDex extends Component {
@@ -87,28 +89,30 @@ class BadgeDex extends Component {
           wrap={true}
         >
           <InfiniteScroll items={this.state.badges} step={30} >
-            {(b, i) => (
-              <RoutedButton key={i} path={"/badgedex/" + b.id}>
-                <Box
-                  align="center"
-                  width="small"
-                >
-                  <Text>{"#" + ('000' + b.id).slice(-3)}</Text>
-                  <Image
-                    style={{opacity: b.collected ? 1 : 0.2}}
-                    width="150em"
-                    src={b.avatar}
-                  />
-                  <Text>{this.truncateName(b.name)}</Text>
-                </Box>
-              </RoutedButton>
-            )}
-          </InfiniteScroll>
-          <Box pad="large">
-            <Text color="status-critical">{this.state.error}</Text>
+            {(b, i) => {
+              const avatar = b.avatar.includes("missing") ? badge_missing : b.avatar;
+              return (
+                <RoutedButton key={i} path={"/badgedex/" + b.id}>
+                  <Box
+                    align="center"
+                    width="small"
+                  >
+                    <Text>{"#" + ('000' + b.id).slice(-3)}</Text>
+                    <Image
+                      style={{opacity: b.collected ? 1 : 0.2}}
+                      width="150em"
+                      src={avatar}
+                    />
+                    <Text>{this.truncateName(b.name)}</Text>
+                  </Box>
+                </RoutedButton>
+              );}}
+            </InfiniteScroll>
+            <Box pad="large">
+              <Text color="status-critical">{this.state.error}</Text>
+            </Box>
           </Box>
         </Box>
-      </Box>
     );
   }
 }
