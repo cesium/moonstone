@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Account, Welcome } from "../components";
+import { Account } from "../components";
 import userInfo from "../containers/userInfo";
 
 import "../index.css";
@@ -9,7 +9,7 @@ class IndexPage extends Component {
     if(localStorage.getItem("jwt")){
       return <Account size={this.props.size} />;
     } else {
-      return <Welcome size={this.props.size} />
+      window.location.pathname = "/login";
     }
   }
 }
