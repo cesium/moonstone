@@ -49,7 +49,7 @@ class Badge extends Component {
     const avatar = this.state.badge.avatar && this.state.badge.avatar.includes("missing") ?
       badge_missing : this.state.badge.avatar;
     return (
-      <Box className="content">
+      <Box>
         {this.state.error === "" ?
             <Box pad={{ horizontal: "medium", bottom: "medium", top: "medium" }} gap="medium">
               <Heading level="1" alignSelf="center">Badge</Heading>

@@ -1,32 +1,81 @@
 import React, { Component } from "react";
 
 import QRCode from "qrcode.react";
-import { Box, Text, Button, Heading, RoutedButton, Collapsible, Image } from "grommet";
-import { Apps } from "grommet-icons";
-import { FaAlignJustify, FaUser, FaFlagCheckered, FaHeart, FaAngleDoubleLeft, FaAngleDoubleRight} from 'react-icons/fa';
-import { GoListUnordered, GoDiffAdded } from 'react-icons/go'
+import { Box, Text, RoutedButton, Collapsible, Image, Button } from "grommet";
+import { Menu, Logout, Archive, Trophy, User, AddCircle } from 'grommet-icons';
+
 import UserData from "../../services/userData.js"
 import "./index.css";
-import moonstone from "./moonstone-logo.png";
 import attendee_missing from '../../images/default/avatar-missing.png';
 
 const PAGES = [
   {
     label: "Badges",
     href: "/badgedex",
-    fa: <GoListUnordered />
+    fa: <Archive color='white'/>
   },
   {
     label: "Rank",
     href: "/rank",
-    fa: <FaFlagCheckered />
+    fa: <Trophy color='white'/>
+  },
+  {
+    label: "Account",
+    href: "/user",
+    fa: <User color='white'/>
   },
   {
     label: "Claim Badge",
     href: "/referral",
-    fa: <GoDiffAdded />
+    fa: <AddCircle color='white'/>
   }
-]
+];
+
+class HorizontalCollapsible extends Component {
+  state = {
+    openNotification: false
+  };
+
+  render() {
+    const { openNotification } = this.state;
+
+    return (
+      <Box fill>
+        <Box
+          as="header"
+          direction="row"
+          align="center"
+          pad={{ vertical: "small", horizontal: "medium" }}
+          justify="between"
+          background={{image: "url(https://seium.org/assets/backgrounds/light-stuff.png)"}}
+          elevation="large"
+          style={{ zIndex: "1000" }}
+        >
+          <Button href="/">
+            <Image width="100" height="50" src={require('./moonstone-logo.png')} />
+          </Button>
+          <Button
+            onClick={() => this.setState({ openNotification: !openNotification })}
+            icon={<Menu color='white'/>}
+          />
+        </Box>
+        <Box flex direction="row">
+          <Collapsible className="fullHeight" direction="vertical" open={openNotification}>
+            <Box
+              className="fullHeight"
+              width="xlarge"
+              background={{image: "url(https://seium.org/assets/backgrounds/light-stuff.png)"}}
+              pad="small"
+              elevation="small"
+            >
+              {this.props.content}
+            </Box>
+          </Collapsible>
+        </Box>
+      </Box>
+    );
+  }
+}
 
 class Header extends Component {
   constructor(props) {
@@ -48,98 +97,66 @@ class Header extends Component {
       .catch(e => {});
   }
 
-  static hideAndShow(e) {
-    e.preventDefault();
-    const sideBar = document.getElementsByClassName('sideBar')[0];
-    const show    = document.getElementsByClassName('sideBarLinkShow')[0];
-    const hide    = document.getElementsByClassName('sideBarLinkHide')[0];
-
-    if (sideBar.style.display === 'none') {
-      sideBar.style.display = 'block';
-      show.style.display = 'none';
-      hide.style.display = 'block'
-    } else {
-      sideBar.style.display = 'none';
-      show.style.display = 'block';
-      hide.style.display = 'none'
-    }
-  }
-
   render() {
-    const { openMenu } = this.state;
     const loggedIn = localStorage.getItem("jwt") !== null;
     var avatar = "";
     if(loggedIn) {
       avatar = this.state.user.avatar && this.state.user.avatar.includes("missing") ?
         attendee_missing : this.state.user.avatar;
     }
+
+    const content = (
+      <Box>
+          <Box align="center" pad={{ horizontal: "medium", bottom: "large" }}>
+            {this.props.size === "small" ? (
+              <QRCode
+                renderAs="svg"
+                value={"https://intra.seium.org/user/" + this.props.user.id}
+              />
+            ) : (
+              <Box>
+                <Button href="/" pad={{bottom: "large" }}>
+                  <Image width="150" height="80" src={require('./moonstone-logo.png')} />
+                </Button>
+                <Button>
+                  <Image width="150" height="150" src={loggedIn ? avatar : ""} />
+                </Button>
+              </Box>
+            )}
+          </Box>
+          {PAGES.map((page, i) => (
+            <Box key={i} pad={{ horizontal: "large", bottom: "large" }}>
+              <RoutedButton path={page.href}>
+                <Text color="white" size="large">{page.fa} {page.label}</Text>
+              </RoutedButton>
+            </Box>
+          ))}
+          {loggedIn ?
+            <Box
+              alignContent="end"
+              justify="end"
+              pad={{ horizontal: "large" }}
+            >
+              <RoutedButton
+                path="/login"
+                onClick={() => localStorage.removeItem("jwt")}
+              >
+                <Text color="white" size="large"><Logout color='white'/> Logout</Text>
+              </RoutedButton>
+            </Box>
+            : null}
+      </Box>
+    );
+
     return (
       <Box>
-          <Box gridArea="header" onClick={Header.hideAndShow} background="brand" className="sideBarLinkShow">
-            <Text><FaAngleDoubleRight /></Text>
-          </Box>
-          <Box gridArea="header" onClick={Header.hideAndShow} background="brand" className="sideBarLinkHide">
-            <Text><FaAngleDoubleLeft /></Text>
-          </Box>
-          <Box gridArea="header" background="brand" className="sideBar">
-            <Box
-              direction="row"
-              justify="between"
-              align="center"
-              pad={{ horizontal: "medium", vertical: "small" }}
-            >
-              <RoutedButton path="/">
-                <Text className="sideBarHome"><FaAlignJustify /> Home</Text>
-              </RoutedButton>
-              {this.props.size === "small" && loggedIn ? (
-                <Button
-                  onClick={() => this.setState({ openMenu: !openMenu })}
-                  icon={<Apps color="light-1" />}
-                />
-              ) : null}
+          {this.props.size === "small" ?
+            <HorizontalCollapsible content={content} className="fullHeight"/>
+          :
+            <Box gridArea="header" className="sideBar">
+              {content}
             </Box>
-            {this.props.size !== "small" || loggedIn ?
-                <Collapsible direction="vertical" open={openMenu}>
-                  <Box align="center" pad={{ horizontal: "medium", vertical: "small" }}>
-                    {this.props.size === "small" ? (
-                      <QRCode
-                        renderAs="svg"
-                        value={"https://moonstone.seium.org/user/" + this.state.user.id}
-                      />
-                    ) : (
-                      <Image src={loggedIn ? avatar : ""} />
-                    )}
-                  </Box>
-                  {PAGES.map((page, i) => (
-                    <Box className="textDiv" key={i} pad={{ horizontal: "medium", vertical: "small" }}>
-                      <RoutedButton path={page.href}>
-                        <Text color="white" size="large">{page.fa} {page.label}</Text>
-                      </RoutedButton>
-                    </Box>
-                  ))}
-                  {loggedIn ?
-                      <Box
-                        alignContent="end"
-                        justify="end"
-                        pad={{ horizontal: "medium", vertical: "small", bottom: "medium" }}
-                      >
-                        <RoutedButton
-                          round="true"
-                          label={<Text size="medium">Logout</Text>}
-                          path="/login"
-                          onClick={() => localStorage.removeItem("jwt")}
-                        />
-                      </Box>
-                      : null}
-                    </Collapsible>
-                : null}
-                <Box>
-                  <img className="logo" src={moonstone} alt="Moonstone"/>
-                </Box>
-                <Box className="copyright">
-                  <p>Made with <FaHeart /> by <a href="http://cesium.di.uminho.pt">CeSIUM</a></p>
-                </Box>
-            </Box>
+          }
       </Box>
     );
   }
