@@ -9,7 +9,7 @@ class IndexPage extends Component {
     if(localStorage.getItem("jwt")){
       return <Account size={this.props.size} />;
     } else {
-      return <Welcome size={this.props.size} />
+      window.location.pathname = "/login";
     }
   }
 }

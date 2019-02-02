@@ -4,13 +4,13 @@
 
   width: 100%;
 
-  background: #ffffff;
+  background: #F8F8F8;
 }
 
 .Layout-body {
   padding: 56px 14px 0;
 
-  background: radial-gradient(568.87px at 0% 0%, #ffffff 0%, #f0f4fd 100%);
+  background: radial-gradient(568.87px at 0% 0%, #F8F8F8 0%, #F8F8F8 100%);
 }
 
 @media screen and (min-width: 748px) {
