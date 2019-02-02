@@ -126,7 +126,7 @@ class Header extends Component {
               <Box pad={{top: "large"}} >
                 <QRCode
                   renderAs="svg"
-                  value={process.env.REACT_APP_API_URL + "user/" + this.props.user.id}
+                  value={process.env.REACT_APP_BASE_URL + "user/" + this.props.user.id}
                 />
               </Box>
             ) : (
