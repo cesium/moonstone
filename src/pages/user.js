@@ -12,7 +12,7 @@ class User extends Component {
     };
   }
 
-  // Check if is register
+  // Check if is registered
   componentDidMount() {
     const api_endpoint =
       process.env.REACT_APP_ENDPOINT
@@ -40,6 +40,8 @@ class User extends Component {
 
   handleRegisterCheckError(error) {
     this.setState({ error: "Network Error" });
+    console.log(error);
+
   }
 
   // Get the user if is registered
@@ -87,7 +89,7 @@ class User extends Component {
             <Box pad={{ horizontal: "medium", bottom: "medium", top: "medium" }} gap="medium">
               <Heading level="1" alignSelf="center">{this.state.user.nickname}</Heading>
               <Box margin="small" align="center" gap="medium">
-                <Image src={this.state.user.avatar}/>
+                <Image width="150em" src={this.state.user.avatar}/>
               </Box>
               <Heading level="2" alignSelf="center">Badges</Heading>
               <Box

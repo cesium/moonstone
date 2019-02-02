@@ -4,7 +4,6 @@ import {Box, Image, Text, Heading, RoutedButton, InfiniteScroll, FormField,
 import axios from 'axios';
 import {Edit, Checkmark} from "grommet-icons";
 import QRCode from "qrcode.react";
-import { Achievement } from "grommet-icons";
 import "./index.css";
 import UserData from '../../services/userData.js'
 import FormData from 'form-data';
@@ -120,7 +119,7 @@ class Account extends Component {
   }
 
   render() {
-    let avatar = this.state.user.avatar.includes("missing") ?
+    let avatar = this.state.user.avatar && this.state.user.avatar.includes("missing") ?
       attendee_missing : this.state.user.avatar;
     return (
       <Box
