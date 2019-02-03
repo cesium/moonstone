@@ -14,11 +14,10 @@ class Account extends Component {
     super(props);
     this.state = {
       user: {},
-      error: "",
       edit_username: false,
       new_username: "",
       edit_avatar: false,
-      avatar_error: ""
+      error: ""
     };
     this.swapEditUsername = this.swapEditUsername.bind(this);
     this.swapEditAvatar = this.swapEditAvatar.bind(this);
@@ -45,6 +44,12 @@ class Account extends Component {
         || error.response.data.error === "invalid_token"))
     {
       window.location.pathname = "/login";
+    } else if (error.response
+      && error.response.data.hasOwnProperty("errors")
+      && error.response.data.errors.nickname)
+    {
+      this.setState({ error: "Invalid User Name" });
+      return;
     }
     this.setState({ error: "Network Error" });
   }
@@ -85,12 +90,12 @@ class Account extends Component {
     };
     axios.put(api_endpoint, data, headers)
       .then(this.reloadUser)
-      .catch(this.reloadUser);
+      .catch(e => this.handleError(e));
   }
 
   handleImageChange(event) {
     if(event.target.files[0].size > 1000000) {
-      this.setState({avatar_error: "Image too large, maximum file size: 1Mb"});
+      this.setState({error: "Image too large, maximum file size: 1Mb"});
       return;
     }
     const api_endpoint =
@@ -164,7 +169,7 @@ class Account extends Component {
               :
               <Button icon={<Edit />} label="Avatar" plain={true} onClick={this.swapEditAvatar}/>
           }
-          <Text color="status-critical">{this.state.avatar_error}</Text>
+          <Text color="status-critical">{this.state.error}</Text>
           {this.state.user.badges ? <Heading justify="center" level="2">Badges</Heading> : null}
         </Box>
         <BadgeDex badges={this.state.user.badges ? this.state.user.badges : []} allCollected={true} />
