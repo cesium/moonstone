@@ -99,7 +99,7 @@ class Header extends Component {
     return (
       <Box>
         {PAGES.map((page, i) => (
-          <Box align={paddingBottom === "large" ? "center" : ""} key={i} pad={{horizontal: "large", bottom: paddingBottom}}>
+          <Box align={paddingBottom === "large" ? "center" : "start"} key={i} pad={{horizontal: "large", bottom: paddingBottom}}>
             <RoutedButton path={page.href}>
               <Text color="white" size="large">{page.fa} {page.label}</Text>
             </RoutedButton>
@@ -150,7 +150,7 @@ class Header extends Component {
             alignContent="end"
             justify="end"
             pad={{ horizontal: "large" }}
-            align={this.props.size === "small" ? "center" : ""}
+            align={this.props.size === "small" ? "center" : "start"}
           >
             <RoutedButton
               path="/login"
@@ -184,7 +184,7 @@ class Header extends Component {
             alignContent="end"
             justify="end"
             pad={{ horizontal: "large" }}
-            align={this.props.size === "small" ? "center" : ""}
+            align={this.props.size === "small" ? "center" : "start"}
           >
             <RoutedButton
               path="/login"

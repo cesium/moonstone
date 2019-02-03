@@ -40,7 +40,7 @@ class AttendeeTable extends Component {
       }
     }
     return (
-      <Box>
+      <Box align="center">
         <Table>
           <TableHeader>
             <TableRow>
@@ -135,10 +135,10 @@ class RankPage extends Component {
     return (
       <Box align="center" pad="medium">
         <Tabs>
-          <Tab title="Leaderboard">
+          <Tab title={<Text size={this.props.size === "small" ? "medium" : "xlarge"}>Leaderboard</Text>}>
             <AttendeeTable state={this.state} learderboard={true} size={this.props.size}/>
           </Tab>
-          <Tab title="Hall Of Fame">
+          <Tab title={<Text size={this.props.size === "small" ? "medium" : "xlarge"}>Hall Of Fame</Text>}>
             <AttendeeTable state={this.state} learderboard={false} size={this.props.size}/>
           </Tab>
         </Tabs>
