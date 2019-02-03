@@ -55,12 +55,19 @@ class UserData {
       process.env.REACT_APP_ENDPOINT + process.env.REACT_APP_API_USER_INFO;
     const type = await axios.get(api_endpoint_type, auth);
 
-    const api_endpoint_attendee =
-      process.env.REACT_APP_ENDPOINT + process.env.REACT_APP_API_ATTENDEE;
-    const user = await axios.get(api_endpoint_attendee, auth);
+    console.log(type);
 
     state.type = type.data.type;
-    state.user = user.data;
+    if(state.type === "attendee"){
+      const api_endpoint_attendee =
+        process.env.REACT_APP_ENDPOINT + process.env.REACT_APP_API_ATTENDEE;
+      const user = await axios.get(api_endpoint_attendee, auth);
+      state.user = user.data;
+    } else if (state.type === "company") {
+      state.user = {};
+    } else {
+      localStorage.removeItem("jwt");
+    }
     state.subscriptions.forEach(f => f());
   }
 
