@@ -57,13 +57,14 @@ class Login extends Component {
       .then(res => this.handleLoginResponse(res))
       .catch(res => this.handleErrorResponse(res));
   }
-  
+
   render() {
     return (
       <Box full fill={true} gridArea="nav" background="light-1">
         <Box alignSelf="center">
           <FormField label="Email">
             <TextInput
+              type="email"
               placeholder="foo@bar.com"
               size="xlarge"
               onChange={e => this.onChangeEmail(e)}
@@ -89,7 +90,7 @@ class Login extends Component {
           />
         </Box>
 
-        <Box>
+        <Box align="center" margin="medium">
           <Text color="status-critical">{this.getErrorText()}</Text>
         </Box>
       </Box>

@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {Box, Image, Text, Heading, RoutedButton, InfiniteScroll} from "grommet";
 import axios from 'axios';
 import userInfo from "../containers/userInfo.js";
+import attendee_missing from "../images/default/avatar-missing.png";
 
 class User extends Component {
   constructor(props) {
@@ -40,8 +41,6 @@ class User extends Component {
 
   handleRegisterCheckError(error) {
     this.setState({ error: "Network Error" });
-    console.log(error);
-
   }
 
   // Get the user if is registered
@@ -83,13 +82,15 @@ class User extends Component {
   }
 
   render() {
+    const avatar = this.state.user.avatar && this.state.user.avatar.includes("missing") ?
+      attendee_missing : this.state.user.avatar;
     return (
       <Box>
         {this.state.error === "" ?
             <Box pad={{ horizontal: "medium", bottom: "medium", top: "medium" }} gap="medium">
               <Heading level="1" alignSelf="center">{this.state.user.nickname}</Heading>
               <Box margin="small" align="center" gap="medium">
-                <Image width="150em" src={this.state.user.avatar}/>
+                <Image width="300em" src={this.state.user.avatar}/>
               </Box>
               <Heading level="2" alignSelf="center">Badges</Heading>
               <Box
