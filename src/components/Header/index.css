@@ -5,6 +5,10 @@
   background-image: url("light-stuff.png");
   z-index: 1;
   padding-top: 15px;
+  position:fixed;
+  top:0;
+  left:0;
+  width:25%;
 }
 
 .sideBar span {

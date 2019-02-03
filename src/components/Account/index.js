@@ -17,7 +17,8 @@ class Account extends Component {
       edit_username: false,
       new_username: "",
       edit_avatar: false,
-      error: ""
+      error: "",
+      userType: "",
     };
     this.swapEditUsername = this.swapEditUsername.bind(this);
     this.swapEditAvatar = this.swapEditAvatar.bind(this);
@@ -34,6 +35,9 @@ class Account extends Component {
   getUser() {
     UserData.prototype.getUser()
       .then(user => this.setState({user: user, error: ""}))
+      .catch(e => this.handleError(e));
+    UserData.prototype.getType()
+      .then(type => this.setState({userType: type, error: ""}))
       .catch(e => this.handleError(e));
   }
 
@@ -124,6 +128,7 @@ class Account extends Component {
   }
 
   render() {
+    if(this.state.userType === "company") return null;
     let avatar = this.state.user.avatar && this.state.user.avatar.includes("missing") ?
       attendee_missing : this.state.user.avatar;
     return (
