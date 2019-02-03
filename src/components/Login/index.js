@@ -60,7 +60,7 @@ class Login extends Component {
 
   render() {
     return (
-      <Box full fill={true} gridArea="nav" background="light-1">
+      <Box gridArea="nav">
         <Box alignSelf="center">
           <FormField label="Email">
             <TextInput

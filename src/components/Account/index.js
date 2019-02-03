@@ -125,7 +125,6 @@ class Account extends Component {
       <Box
         full fill={true}
         gridArea="nav"
-        background="light-1"
         gap="medium"
         pad={{ top: "large", bottom: "medium" }}
       >
