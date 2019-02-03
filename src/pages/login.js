@@ -1,6 +1,7 @@
 import React, { Component } from "react";
-import {Box} from "grommet";
-import {Login, Welcome} from "../components";
+import {Box, Image} from "grommet";
+import {Login} from "../components";
+import logo from "../pages/logo.png";
 
 var state = {
   isLogin: true
@@ -13,11 +14,9 @@ class LoginPage extends Component {
 
   render() {
     return (
-      <Box background="light-1" fill="vertical">
-        <Box margin={{ left: "medium", right:"medium", top: "medium", bottom: "small" }}>
-          <Welcome size="small"/>
-          <Login />
-        </Box>
+      <Box fill="vertical" margin={{ horizontal: "medium" }}>
+        <Image align="center" fit="contain" src={logo} />
+        <Login />
       </Box>
     );
   }
