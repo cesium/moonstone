@@ -111,7 +111,6 @@ class Header extends Component {
 
   render() {
     var content;
-    console.log(this.state);
     if(this.state.userType && this.state.userType === "attendee"){
       let avatar = this.state.user && this.state.user.avatar && this.state.user.avatar.includes("missing") ?
         attendee_missing : this.state.user.avatar;

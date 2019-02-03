@@ -54,10 +54,8 @@ class UserData {
     const api_endpoint_type =
       process.env.REACT_APP_ENDPOINT + process.env.REACT_APP_API_USER_INFO;
     const type = await axios.get(api_endpoint_type, auth);
-
-    console.log(type);
-
     state.type = type.data.type;
+
     if(state.type === "attendee"){
       const api_endpoint_attendee =
         process.env.REACT_APP_ENDPOINT + process.env.REACT_APP_API_ATTENDEE;
