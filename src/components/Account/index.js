@@ -48,7 +48,7 @@ class Account extends Component {
       && error.response.data.hasOwnProperty("errors")
       && error.response.data.errors.nickname)
     {
-      this.setState({ error: `Invalid User Name` });
+      this.setState({ error: "Invalid User Name" });
       return;
     }
     this.setState({ error: "Network Error" });
