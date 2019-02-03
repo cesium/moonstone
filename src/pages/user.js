@@ -1,8 +1,9 @@
 import React, {Component} from 'react';
-import {Box, Image, Text, Heading, RoutedButton, InfiniteScroll} from "grommet";
+import {Box, Image, Text, Heading} from "grommet";
 import axios from 'axios';
 import userInfo from "../containers/userInfo.js";
 import attendee_missing from "../images/default/avatar-missing.png";
+import BadgeDex from "../components/BadgeDex/index.js";
 
 class User extends Component {
   constructor(props) {
@@ -76,40 +77,17 @@ class User extends Component {
     this.setState({ error: "Network Error" });
   }
 
-  truncateName(name) {
-    const maxLen = 15;
-    return name.length > maxLen ? name.substring(0, maxLen) + "..." : name;
-  }
-
   render() {
     const avatar = this.state.user.avatar && this.state.user.avatar.includes("missing") ?
       attendee_missing : this.state.user.avatar;
     return (
       <Box>
         {this.state.error === "" ?
-            <Box pad={{ horizontal: "medium", bottom: "medium", top: "medium" }} gap="medium">
+            <Box align="center" pad={{ horizontal: "medium", bottom: "medium", top: "medium" }} gap="medium">
               <Heading level="1" alignSelf="center">{this.state.user.nickname}</Heading>
-              <Box margin="small" align="center" gap="medium">
-                <Image width="300em" src={this.state.user.avatar}/>
-              </Box>
+              <Image width="300em" src={avatar}/>
               <Heading level="2" alignSelf="center">Badges</Heading>
-              <Box
-                pad={{ horizontal: "medium", bottom: "medium" }}
-                justify="start"
-                direction="row"
-                wrap={true}
-              >
-                <InfiniteScroll items={this.state.user.badges} step={30} >
-                  {(b, i) => (
-                    <RoutedButton key={i} path={"/badgedex/" + b.id}>
-                      <Box align="center" width="small">
-                        <Image width="150em" src={b.avatar}/>
-                        <Text>{this.truncateName(b.name)}</Text>
-                      </Box>
-                    </RoutedButton>
-                  )}
-                </InfiniteScroll>
-              </Box>
+              <BadgeDex badges={this.state.user.badges ? this.state.user.badges : []} allCollected={true}/>
             </Box>
             :
             <Box pad="large">

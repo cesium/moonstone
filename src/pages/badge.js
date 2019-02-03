@@ -55,7 +55,7 @@ class Badge extends Component {
               <Heading level="1" alignSelf="center">Badge</Heading>
               <Heading level="2" alignSelf="center">{this.state.badge.name}</Heading>
               <Box margin="small" align="center" gap="medium">
-                <Image src={avatar}/>
+                <Image height={this.props.size === "small" ? "187px" : "375px" } src={avatar}/>
                 <Text>{this.state.badge.description}</Text>
               </Box>
             </Box>

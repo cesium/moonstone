@@ -1,13 +1,13 @@
 import React, {Component} from 'react';
-import {Box, Image, Text, Heading, RoutedButton, InfiniteScroll} from "grommet";
+import {Box, Text, Heading} from "grommet";
 import axios from 'axios';
 import userInfo from "../containers/userInfo";
 import UserData from "../services/userData.js";
-import badge_missing from "../images/default/badge-missing.png";
+import BadgeDex from "../components/BadgeDex/index.js";
 
 import "../index.css";
 
-class BadgeDex extends Component {
+class BadgeDexPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -76,48 +76,14 @@ class BadgeDex extends Component {
     return (
       <Box pad={{ horizontal: "medium", bottom: "large", top: "medium" }} gap="medium">
         <Heading alignSelf="center">BadgeDex</Heading>
-        <Box
-          pad={{ horizontal: "medium", bottom: "medium" }}
-          justify="center"
-          direction="row"
-          wrap={true}
-        >
-          {this.state.badges.map((b, i) => {
-            const avatar = b.avatar.includes("missing") ? badge_missing : b.avatar;
-            return (
-              <RoutedButton key={i} path={"/badgedex/" + b.id}>
-                <Box
-                  align="center"
-                  width="small"
-                  margin="small"
-                >
-                  <Image
-                    style={{opacity: b.collected ? 1 : 0.2}}
-                    width="150em"
-                    src={avatar}
-                  />
-                  <Text
-                    color={b.collected ? "dark-4" : "light-4" }
-                  >
-                    {"#" + ('000' + b.id).slice(-3)}
-                  </Text>
-                  <Text
-                    color={b.collected ? "" : "light-4" }
-                    textAlign="center"
-                  >
-                    {b.name}
-                  </Text>
-                </Box>
-              </RoutedButton>
-            );})}
-            <Box pad="large">
-              <Text color="status-critical">{this.state.error}</Text>
-            </Box>
-          </Box>
+        <BadgeDex badges={this.state.badges} />
+        <Box pad="large">
+          <Text color="status-critical">{this.state.error}</Text>
         </Box>
+      </Box>
     );
   }
 }
 
-export default userInfo(BadgeDex);
+export default userInfo(BadgeDexPage);
 
