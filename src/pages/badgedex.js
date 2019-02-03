@@ -43,7 +43,6 @@ class BadgeDex extends Component {
               'Authorization': 'Bearer ' + localStorage.getItem('jwt')
             }
           };
-          console.log("yay");
           axios.get(api_endpoint, config)
             .then(response => this.handleUserBadges(res.data.data, response))
             .catch(error => this.handleError(error));
@@ -73,41 +72,44 @@ class BadgeDex extends Component {
     }
   }
 
-  truncateName(name) {
-    const maxLen = 15;
-    return name.length > maxLen ? name.substring(0, maxLen) + "..." : name;
-  }
-
   render() {
     return (
       <Box pad={{ horizontal: "medium", bottom: "large", top: "medium" }} gap="medium">
         <Heading alignSelf="center">BadgeDex</Heading>
         <Box
           pad={{ horizontal: "medium", bottom: "medium" }}
-          justify="start"
+          justify="center"
           direction="row"
           wrap={true}
         >
-          <InfiniteScroll items={this.state.badges} step={30} >
-            {(b, i) => {
-              const avatar = b.avatar.includes("missing") ? badge_missing : b.avatar;
-              return (
-                <RoutedButton key={i} path={"/badgedex/" + b.id}>
-                  <Box
-                    align="center"
-                    width="small"
+          {this.state.badges.map((b, i) => {
+            const avatar = b.avatar.includes("missing") ? badge_missing : b.avatar;
+            return (
+              <RoutedButton key={i} path={"/badgedex/" + b.id}>
+                <Box
+                  align="center"
+                  width="small"
+                  margin="small"
+                >
+                  <Image
+                    style={{opacity: b.collected ? 1 : 0.2}}
+                    width="150em"
+                    src={avatar}
+                  />
+                  <Text
+                    color={b.collected ? "dark-4" : "light-4" }
                   >
-                    <Text>{"#" + ('000' + b.id).slice(-3)}</Text>
-                    <Image
-                      style={{opacity: b.collected ? 1 : 0.2}}
-                      width="150em"
-                      src={avatar}
-                    />
-                    <Text>{this.truncateName(b.name)}</Text>
-                  </Box>
-                </RoutedButton>
-              );}}
-            </InfiniteScroll>
+                    {"#" + ('000' + b.id).slice(-3)}
+                  </Text>
+                  <Text
+                    color={b.collected ? "" : "light-4" }
+                    textAlign="center"
+                  >
+                    {b.name}
+                  </Text>
+                </Box>
+              </RoutedButton>
+            );})}
             <Box pad="large">
               <Text color="status-critical">{this.state.error}</Text>
             </Box>

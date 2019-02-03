@@ -2,7 +2,7 @@ import React, { Component } from "react";
 
 import QRCode from "qrcode.react";
 import { Box, Text, RoutedButton, Collapsible, Image, Button } from "grommet";
-import { Menu, Logout, Archive, Trophy, User, AddCircle } from 'grommet-icons';
+import { Menu, Logout, Archive, Trophy, AddCircle } from 'grommet-icons';
 
 import UserData from "../../services/userData.js"
 import "./index.css";
@@ -125,13 +125,11 @@ class Header extends Component {
                 />
               </Box>
             ) : (
-              <Box>
+              <Box align="center">
                 <RoutedButton path={"/"} pad={{ bottom: "medium" }}>
                   <Image width="250" height="130" src={require('./moonstone-logo.png')} />
                 </RoutedButton>
-                <Button>
-                  <Image width="150" height="150" src={loggedIn ? avatar : ""} />
-                </Button>
+                <Image width="150em" height="150em" src={loggedIn ? avatar : ""}/>
               </Box>
             )}
           </Box>
