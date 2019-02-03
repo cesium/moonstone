@@ -116,7 +116,7 @@ class Header extends Component {
 
     const content = (
       <Box>
-          <Box align="center" pad={{ horizontal: "small", bottom: "medium" }}>
+          <Box pad={{ horizontal: "small", bottom: "medium" }}>
             {this.props.size === "small" ? (
               <Box pad={{top: "large"}} >
                 <QRCode

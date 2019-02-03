@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import {Box, Image, Text, Heading, RoutedButton, InfiniteScroll, FormField,
-  Button, TextInput} from "grommet";
+import {Box, Image, Text, Heading, FormField, Button, TextInput} from "grommet";
 import axios from 'axios';
 import {Edit, Checkmark} from "grommet-icons";
 import QRCode from "qrcode.react";
@@ -8,6 +7,7 @@ import "./index.css";
 import UserData from '../../services/userData.js'
 import FormData from 'form-data';
 import attendee_missing from '../../images/default/avatar-missing.png';
+import BadgeDex from '../BadgeDex/index.js';
 
 class Account extends Component {
   constructor(props) {
@@ -166,24 +166,9 @@ class Account extends Component {
               <Button icon={<Edit />} label="Avatar" plain={true} onClick={this.swapEditAvatar}/>
           }
           <Text color="status-critical">{this.state.avatar_error}</Text>
+          {this.state.user.badges ? <Heading justify="center" level="2">Badges</Heading> : null}
         </Box>
-        <Box
-          pad={{ horizontal: "medium", bottom: "medium" }}
-          justify="start"
-          direction="row"
-          wrap={true}
-        >
-          <InfiniteScroll items={this.state.user.badges} step={30} >
-            {(b, i) => (
-              <RoutedButton key={i} path={"/badgedex/" + b.id}>
-                <Box align="center" width="small">
-                  <Image width="150em" src={b.avatar}/>
-                  <Text>{this.truncateName(b.name)}</Text>
-                </Box>
-              </RoutedButton>
-            )}
-          </InfiniteScroll>
-        </Box>
+        <BadgeDex badges={this.state.user.badges ? this.state.user.badges : []} allCollected={true} />
       </Box>
     );
   }
