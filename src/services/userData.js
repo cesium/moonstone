@@ -4,6 +4,7 @@ import axios from "axios";
 var state = {
   jwt: "",
   user: null,
+  type: null,
   subscriptions: [],
 }
 
@@ -33,27 +34,34 @@ class UserData {
     return state.user;
   }
 
+  async getType() {
+    await this.fetchUser();
+    return state.type;
+  }
+
   async fetchUser() {
-    if(localStorage.getItem("jwt") === null) throw {response: {data: {error: "unauthenticated"}}};
     if(state.user === null || localStorage.getItem("jwt") !== state.jwt)
       await this.fetchUserForce();
   }
 
-  onResponseInfo(response)  {
-    state.user = response.data;
-    state.subscriptions.forEach(f => f());
-  };
-
   async fetchUserForce() {
     state.jwt = localStorage.getItem("jwt");
-    var api_endpoint =
-      process.env.REACT_APP_ENDPOINT + process.env.REACT_APP_API_ATTENDEE;
-    let auth = {
+    const auth = {
       headers: {
         Authorization: "Bearer " + state.jwt
       }
     };
-    this.onResponseInfo(await axios.get(api_endpoint, auth));
+    const api_endpoint_type =
+      process.env.REACT_APP_ENDPOINT + process.env.REACT_APP_API_USER_INFO;
+    const type = await axios.get(api_endpoint_type, auth);
+
+    const api_endpoint_attendee =
+      process.env.REACT_APP_ENDPOINT + process.env.REACT_APP_API_ATTENDEE;
+    const user = await axios.get(api_endpoint_attendee, auth);
+
+    state.type = type.data.type;
+    state.user = user.data;
+    state.subscriptions.forEach(f => f());
   }
 
   subscribeToStateChange(func) {
