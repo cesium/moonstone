@@ -52,3 +52,7 @@
   height: 100%;
   z-index: 101;
 }
+
+.avatar{
+  /* border-radius: 50%; */
+}

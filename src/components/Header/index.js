@@ -129,7 +129,11 @@ class Header extends Component {
                 <RoutedButton path={"/"} pad={{ bottom: "medium" }}>
                   <Image width="250" height="130" src={require('./moonstone-logo.png')} />
                 </RoutedButton>
-                <Image width="150em" height="150em" src={loggedIn ? avatar : ""}/>
+                <RoutedButton path={"/user/" + this.state.user.id} >
+                <Box border={{size: "small", side:"all", color:"light-1"}}>
+                  <Image height="200em" className="avatar" src={loggedIn ? avatar : ""}/>
+                </Box>
+              </RoutedButton>
               </Box>
             )}
           </Box>
