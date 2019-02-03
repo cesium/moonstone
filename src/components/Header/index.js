@@ -28,7 +28,7 @@ const PAGES = [
 
 class HorizontalCollapsible extends Component {
   state = {
-    openNotification: false
+    openNotification: false,
   };
 
   render() {
@@ -76,7 +76,8 @@ class Header extends Component {
     super(props);
     this.state = {
       openMenu: this.props.size !== "small",
-      user: {}
+      user: {},
+      userType: "",
     };
   }
 
@@ -88,15 +89,17 @@ class Header extends Component {
   getUser() {
     UserData.prototype.getUser()
       .then(user => this.setState({user: user}))
-      .catch(e => {
-      });
+      .catch(e => {});
+    UserData.prototype.getType()
+      .then(type => this.setState({userType: type, error: ""}))
+      .catch(e => {});
   }
 
   renderEntries(paddingBottom) {
     return (
       <Box>
         {PAGES.map((page, i) => (
-          <Box key={i} pad={{horizontal: "large", bottom: paddingBottom}}>
+          <Box align={paddingBottom === "large" ? "center" : ""} key={i} pad={{horizontal: "large", bottom: paddingBottom}}>
             <RoutedButton path={page.href}>
               <Text color="white" size="large">{page.fa} {page.label}</Text>
             </RoutedButton>
@@ -107,15 +110,60 @@ class Header extends Component {
   }
 
   render() {
-    const loggedIn = localStorage.getItem("jwt") !== null;
-    let avatar = "";
-    if(loggedIn) {
-      avatar = this.state.user.avatar && this.state.user.avatar.includes("missing") ?
+    var content;
+    if(this.state.userType && this.state.userType === "attendee"){
+      let avatar = this.state.user && this.state.user.avatar && this.state.user.avatar.includes("missing") ?
         attendee_missing : this.state.user.avatar;
-    }
-
-    const content = (
-      <Box>
+      content = (
+        <Box>
+          <Box pad={{ horizontal: "small", bottom: "medium" }}>
+            {this.props.size === "small" ? (
+              <Box align="center" pad={{vertical: "large"}} >
+                <QRCode
+                  renderAs="svg"
+                  value={process.env.REACT_APP_BASE_URL + "user/" + this.state.user.id}
+                />
+              </Box>
+            ) : (
+              <Box align="center">
+                <RoutedButton path={"/"} pad={{ bottom: "medium" }}>
+                  <Image width="250" height="130" src={require('./moonstone-logo.png')} />
+                </RoutedButton>
+                <RoutedButton path={"/user/" + this.state.user.id} >
+                  <Box border={{size: "small", side:"all", color:"light-1"}}>
+                    <Image height="200em" className="avatar" src={avatar}/>
+                  </Box>
+                </RoutedButton>
+              </Box>
+            )}
+          </Box>
+          {this.props.size === "small" ?
+              <Box>
+                {this.renderEntries("large")}
+              </Box>
+              :
+              <Box>
+                {this.renderEntries("xsmall")}
+              </Box>
+          }
+          <Box
+            alignContent="end"
+            justify="end"
+            pad={{ horizontal: "large" }}
+            align={this.props.size === "small" ? "center" : ""}
+          >
+            <RoutedButton
+              path="/login"
+              onClick={() => localStorage.removeItem("jwt")}
+            >
+              <Text color="white" size="large"><Logout color='white'/> Logout</Text>
+            </RoutedButton>
+          </Box>
+        </Box>
+      );
+    } else {
+      content = (
+        <Box>
           <Box pad={{ horizontal: "small", bottom: "medium" }}>
             {this.props.size === "small" ? (
               <Box pad={{top: "large"}} >
@@ -129,49 +177,35 @@ class Header extends Component {
                 <RoutedButton path={"/"} pad={{ bottom: "medium" }}>
                   <Image width="250" height="130" src={require('./moonstone-logo.png')} />
                 </RoutedButton>
-                <RoutedButton path={"/user/" + this.state.user.id} >
-                <Box border={{size: "small", side:"all", color:"light-1"}}>
-                  <Image height="200em" className="avatar" src={loggedIn ? avatar : ""}/>
-                </Box>
-              </RoutedButton>
               </Box>
             )}
           </Box>
-          {this.props.size === "small" ?
-            <Box>
-              {this.renderEntries("large")}
-            </Box>
-            :
-            <Box>
-              {this.renderEntries("xsmall")}
-            </Box>
-          }
-          {loggedIn ?
-            <Box
-              alignContent="end"
-              justify="end"
-              pad={{ horizontal: "large" }}
+          <Box
+            alignContent="end"
+            justify="end"
+            pad={{ horizontal: "large" }}
+            align={this.props.size === "small" ? "center" : ""}
+          >
+            <RoutedButton
+              path="/login"
+              onClick={() => localStorage.removeItem("jwt")}
             >
-              <RoutedButton
-                path="/login"
-                onClick={() => localStorage.removeItem("jwt")}
-              >
-                <Text color="white" size="large"><Logout color='white'/> Logout</Text>
-              </RoutedButton>
-            </Box>
-            : null}
-      </Box>
-    );
+              <Text color="white" size="large"><Logout color='white'/> Logout</Text>
+            </RoutedButton>
+          </Box>
+        </Box>
+      );
+    }
 
     return (
       <Box>
-          {this.props.size === "small" ?
+        {this.props.size === "small" ?
             <HorizontalCollapsible content={content} className="fullHeight"/>
-          :
+            :
             <Box gridArea="header" className="sideBar">
               {content}
             </Box>
-          }
+        }
       </Box>
     );
   }

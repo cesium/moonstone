@@ -70,12 +70,12 @@ class RegisterPage extends Component {
       process.env.REACT_APP_ENDPOINT + process.env.REACT_APP_API_AUTH_SIGN_UP;
     let data = {
       user: {
-        email: this.state.email,
+        email: this.state.email.trim(),
         password: this.state.password,
         password_confirmation: this.state.password_confirmation,
         attendee: {
           id: this.state.id,
-          nickname: this.state.nickname
+          nickname: this.state.nickname.trim(),
         }
       }
     };
@@ -91,6 +91,7 @@ class RegisterPage extends Component {
         <Box alignSelf="center">
           <FormField label="Email">
             <TextInput
+              type="email"
               size="xlarge"
               placeholder="foo@bar.com"
               onChange={e => this.onChangeEmail(e)}
