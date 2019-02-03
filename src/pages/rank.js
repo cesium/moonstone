@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Box, Table, TableBody, TableCell, TableHeader, TableRow,
-  Text, Heading, RoutedButton, Image, Button } from "grommet";
+  Text, RoutedButton, Image } from "grommet";
 import {Tabs, Tab} from 'grommet';
 import axios from "axios";
 import userInfo from "../containers/userInfo";
