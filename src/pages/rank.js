@@ -53,9 +53,10 @@ class RankPage extends Component {
   }
 
   render() {
-    var id = this.state.id ;
-    var rank = this.state.users.findIndex(user => user.id === id);
-    var myUser = this.state.users[rank];
+    const id = this.state.id ;
+    const users = this.state.users.filter(e => !e.volunteer);
+    const rank = users.findIndex(user => user.id === id);
+    const myUser = this.state.users[rank];
     let showRank;
     if(rank > 9) {
       const avatar = myUser.avatar.includes("missing") ? attendee_missing : myUser.avatar;
@@ -93,28 +94,31 @@ class RankPage extends Component {
               </TableRow>
             </TableHeader>
             <TableBody>
-                {this.state.users.slice(0, 10).map((u, i) => {
-                  let weight = u.id === this.state.id ? "bold" : "normal";
-                  const avatar = u.avatar.includes("missing") ? attendee_missing : u.avatar;
-                  return (
-                    <TableRow key={i}>
-                      <TableCell key={COLUMNS[0]} verticalAlign="middle">
+              {users.slice(0, 10).map((u, i) => {
+                const weight = u.id === this.state.id ? "bold" : "normal";
+                const avatar = u.avatar.includes("missing") ? attendee_missing : u.avatar;
+                const fontSize = "large";
+                return (
+                  <TableRow key={i}>
+                    <TableCell key={COLUMNS[0]} verticalAlign="middle">
+                      <RoutedButton path={"/user/" + u.id}>
                         <Image style={{height: 25}} src={avatar} />
-                      </TableCell>
-                      <TableCell key={COLUMNS[1]}>
-                        <Text weight={weight}>{i+1}</Text>
-                      </TableCell>
-                      <TableCell key={COLUMNS[2]}>
-                        <RoutedButton path={"/user/" + u.id}>
-                          <Text weight={weight}>{u.nickname}</Text>
-                        </RoutedButton>
-                      </TableCell>
-                      <TableCell key={COLUMNS[3]}>
-                        <Text weight={weight}>{u.badges}</Text>
-                      </TableCell>
-                    </TableRow>
-                  );})}
-                  {showRank}
+                      </RoutedButton>
+                    </TableCell>
+                    <TableCell key={COLUMNS[1]}>
+                      <Text weight={weight} size={fontSize}>{i+1}</Text>
+                    </TableCell>
+                    <TableCell key={COLUMNS[2]}>
+                      <RoutedButton path={"/user/" + u.id}>
+                        <Text weight={weight} size={fontSize}>{u.nickname}</Text>
+                      </RoutedButton>
+                    </TableCell>
+                    <TableCell key={COLUMNS[3]}>
+                      <Text weight={weight} size={fontSize}>{u.badges}</Text>
+                    </TableCell>
+                  </TableRow>
+                );})}
+                {showRank}
               </TableBody>
             </Table>
             <Box>
