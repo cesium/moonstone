@@ -33,7 +33,7 @@ class HorizontalCollapsible extends Component {
 
   render() {
     const { openNotification } = this.state;
-
+    const loggedIn = localStorage.getItem("jwt") !== null;
     return (
       <Box fill>
         <Box
@@ -49,10 +49,14 @@ class HorizontalCollapsible extends Component {
           <Button href="/">
             <Image width="100" height="50" src={require('./moonstone-logo.png')} />
           </Button>
-          <Button
-            onClick={() => this.setState({ openNotification: !openNotification })}
-            icon={<Menu color='white'/>}
-          />
+          {loggedIn ?
+              <Button
+                onClick={() => this.setState({ openNotification: !openNotification })}
+                icon={<Menu color='white'/>}
+              />
+              :
+              null
+          }
         </Box>
         <Box flex direction="row">
           <Collapsible className="fullHeight" direction="vertical" open={openNotification}>

@@ -65,6 +65,7 @@ class UserData {
       state.user = {};
     } else {
       localStorage.removeItem("jwt");
+      window.location.pathname = "/login";
     }
     state.subscriptions.forEach(f => f());
   }
