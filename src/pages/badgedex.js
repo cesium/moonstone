@@ -4,6 +4,7 @@ import axios from 'axios';
 import userInfo from '../containers/userInfo';
 import UserData from '../services/userData.js';
 import BadgeDex from '../components/BadgeDex/index.js';
+import debounce from 'lodash/debounce';
 
 import '../index.css';
 
@@ -15,6 +16,7 @@ class BadgeDexPage extends Component {
       filteredBadges: [],
       error: ''
     };
+    this.filterBadges = debounce(this.filterBadges, 500);
   }
 
   componentDidMount() {
@@ -92,10 +94,11 @@ class BadgeDexPage extends Component {
       >
         <Heading alignSelf="center">BadgeDex</Heading>
         <TextInput
+          ref="search"
           placeholder="Search badge name..."
-          onChange={event => {
-            this.filterBadges(event.target.value, this.state.badges);
-          }}
+          onChange={() =>
+            this.filterBadges(this.refs.search.value, this.state.badges)
+          }
         />
         <BadgeDex badges={this.state.filteredBadges} />
         <Box pad="large">
