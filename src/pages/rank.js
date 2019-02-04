@@ -19,7 +19,7 @@ class AttendeeTable extends Component {
     let showRank;
     if(rank > 0) {
       let myUser = users[rank];
-      if(rank > 9 && this.props.learderboard ? !myUser.volunteer : myUser.volunteer) {
+      if(rank > 9 && (this.props.learderboard ? !myUser.volunteer : myUser.volunteer)) {
         const avatar = myUser.avatar.includes("missing") ? attendee_missing : myUser.avatar;
         showRank = <TableRow key={rank}>
           <TableCell key={COLUMNS[0]} verticalAlign="middle">
