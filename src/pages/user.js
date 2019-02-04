@@ -4,6 +4,7 @@ import axios from 'axios';
 import userInfo from "../containers/userInfo.js";
 import attendee_missing from "../images/default/avatar-missing.png";
 import BadgeDex from "../components/BadgeDex/index.js";
+import UserData from "../services/userData.js";
 
 class User extends Component {
   constructor(props) {
@@ -35,7 +36,15 @@ class User extends Component {
       if(res.data.is_registered) {
         this.getUser();
       } else {
-        window.location.pathname = "/register/" + this.props.match.params.id;
+        UserData.prototype.getType()
+          .then(type => {
+            if(type === "attendee") {
+              window.location.pathname = "/register/" + this.props.match.params.id;
+            } else {
+              this.setState({ error: "User not registered" });
+            }
+          })
+          .catch(() => {});
       }
     }
   }
@@ -67,14 +76,15 @@ class User extends Component {
   }
 
   handleErrorResponse(error) {
-    if (error.response
-      && error.response.data.hasOwnProperty("error")
-      && (error.response.data.error === "unauthenticated"
-        || error.response.data.error === "invalid_token"))
-    {
-      window.location.pathname = "/login";
+    if (error.response && error.response.data.hasOwnProperty("error")){
+      if(error.response.data.error === "invalid_token" || error.response.data.error === "unauthenticated") {
+        window.location.pathname = "/login";
+      } else if(error.response.data.error === "Internal Server Error") {
+        // lmao 500
+      }
+    } else {
+      this.setState({ error: "Network Error" });
     }
-    this.setState({ error: "Network Error" });
   }
 
   render() {
