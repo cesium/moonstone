@@ -15,26 +15,26 @@ class AttendeeTable extends Component {
     const id = this.props.state.id;
     const users = this.props.state.users.filter(e => this.props.learderboard ? !e.volunteer : e.volunteer);
     const rank = users.findIndex(user => user.id === id);
-    let myUser;
+    const fontSize = this.props.size === "small" ? "small" : "large";
     let showRank;
     if(rank > 0) {
-      myUser = this.props.state.users[rank];
-      if(rank > 9 && this.props.learderboard ? myUser.volunteer : !myUser.volunteer) {
+      let myUser = users[rank];
+      if(rank > 9 && this.props.learderboard ? !myUser.volunteer : myUser.volunteer) {
         const avatar = myUser.avatar.includes("missing") ? attendee_missing : myUser.avatar;
         showRank = <TableRow key={rank}>
           <TableCell key={COLUMNS[0]} verticalAlign="middle">
             <Image style={{height: 25}} src={avatar} />
           </TableCell>
           <TableCell key={COLUMNS[1]}>
-            <Text weight="bold">{rank+1}</Text>
+            <Text weight="bold" size={fontSize}>{rank+1}</Text>
           </TableCell>
           <TableCell key={COLUMNS[2]}>
             <RoutedButton path={"/user/" + myUser.id}>
-              <Text weight="bold">{myUser.nickname}</Text>
+              <Text weight="bold" size={fontSize}>{myUser.nickname}</Text>
             </RoutedButton>
           </TableCell>
           <TableCell key={COLUMNS[3]}>
-            <Text weight="bold">{myUser.badges}</Text>
+            <Text weight="bold" size={fontSize}>{myUser.badges}</Text>
           </TableCell>
         </TableRow>;
       }
@@ -55,7 +55,6 @@ class AttendeeTable extends Component {
             {users.slice(0, 10).map((u, i) => {
               const weight = u.id === this.props.state.id ? "bold" : "normal";
               const avatar = u.avatar.includes("missing") ? attendee_missing : u.avatar;
-              const fontSize = this.props.size === "small" ? "small" : "large";
               return (
                 <TableRow key={i}>
                   <TableCell key={COLUMNS[0]} verticalAlign="middle">
