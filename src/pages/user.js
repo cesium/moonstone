@@ -81,7 +81,7 @@ class User extends Component {
       const user = res.data.data;
       this.setState({
         user,
-        filteredBadges: user.badges,
+        filteredBadges: user.badges ? user.badges : [],
         error: ''
       });
     }
