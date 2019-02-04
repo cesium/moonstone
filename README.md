@@ -2,6 +2,7 @@
 [semaphoreci]: https://semaphoreci.com/cesiuminho/moonstone
 
 # Moonstone
+
 > A gem isn't complete without another
 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/943f4cac-75a3-4e85-856b-31603364a8a1/deploy-status)][netlify]
@@ -23,7 +24,7 @@ local machine for development and testing purposes.
 ### Prerequisites
 
 - [Yarn](https://yarnpkg.com/lang/en/) - Provides a fast, reliable and secure node package manager.
-[Checkout installation guidelines](https://yarnpkg.com/lang/en/docs/install).
+  [Checkout installation guidelines](https://yarnpkg.com/lang/en/docs/install).
 
 ### Installing
 

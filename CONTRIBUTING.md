@@ -21,4 +21,3 @@ interactions with the project.
    reviewer to merge it for you. If you do have merging permissions on the
    repository, you must rebase and squash your Pull Request into a single
    commit.
-
