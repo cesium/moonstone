@@ -2,7 +2,7 @@ import React, { Component } from "react";
 
 import QRCode from "qrcode.react";
 import { Box, Text, RoutedButton, Collapsible, Image, Button } from "grommet";
-import { Menu, Logout, Archive, Trophy, AddCircle } from 'grommet-icons';
+import { Menu, Logout, Archive, Trophy, AddCircle, User } from 'grommet-icons';
 
 import UserData from "../../services/userData.js"
 import "./index.css";
@@ -129,22 +129,33 @@ class Header extends Component {
                 <RoutedButton path={"/"} pad={{ bottom: "medium" }}>
                   <Image width="250" height="130" src={require('./moonstone-logo.png')} />
                 </RoutedButton>
-                <RoutedButton path={"/user/" + this.state.user.id} >
-                  <Box border={{size: "small", side:"all", color:"light-1"}}>
+                {/* <RoutedButton path={"/user/" + this.state.user.id} > */}
+                  <Box >
                     <Image height="200em" className="avatar" src={avatar}/>
                   </Box>
-                </RoutedButton>
+                {/* </RoutedButton> */}
               </Box>
             )}
           </Box>
           {this.props.size === "small" ?
-              <Box>
-                {this.renderEntries("large")}
+            <Box>
+              <Box align="center" pad={{ horizontal: "large", bottom: "large" }}>
+                <RoutedButton path={"/user/" + this.state.user.id}>
+                  <Text color="white" size="large"><User color='white' /> Account</Text>
+                </RoutedButton>
               </Box>
-              :
-              <Box>
-                {this.renderEntries("xsmall")}
+              {this.renderEntries("large")}
+
+            </Box>
+            :
+            <Box>
+              <Box align="" pad={{ horizontal: "large", bottom: "xsmall" }}>
+                <RoutedButton path={"/user/" + this.state.user.id}>
+                  <Text color="white" size="large"><User color='white' /> Account</Text>
+                </RoutedButton>
               </Box>
+              {this.renderEntries("xsmall")}
+            </Box>
           }
           <Box
             alignContent="end"
