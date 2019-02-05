@@ -17,10 +17,6 @@ class User extends Component {
 
   // Check if is registered
   componentDidMount() {
-    if(localStorage.getItem("jwt") === null) {
-      window.location.pathname = "/register/" + this.props.match.params.id;
-      return;
-    }
     const api_endpoint =
       process.env.REACT_APP_ENDPOINT
       + process.env.REACT_APP_API_IS_REGISTERED
@@ -48,7 +44,13 @@ class User extends Component {
               window.location.pathname = "/register/" + this.props.match.params.id;
             }
           })
-          .catch(e => this.handleRegisterCheckError(e));
+          .catch(e => {
+            if(localStorage.getItem("jwt") === null) {
+              window.location.pathname = "/register/" + this.props.match.params.id;
+            } else {
+              this.handleRegisterCheckError(e);
+            }
+          });
       }
     }
   }
