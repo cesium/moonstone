@@ -99,7 +99,11 @@ class Account extends Component {
 
   handleImageChange(event) {
     if(event.target.files[0].size > 1000000) {
-      this.setState({error: "Image too large, maximum file size: 1Mb"});
+      this.setState({error:
+        `Image too large:
+        ${Math.round(event.target.files[0].size / 1000000)}Mb,
+        maximum file size: 1Mb`
+      });
       return;
     }
     const api_endpoint =
