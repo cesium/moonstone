@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Box, Table, TableBody, TableCell, TableHeader, TableRow,
-  Text, RoutedButton, Image } from "grommet";
+  Text, RoutedButton, Image, Button } from "grommet";
+import {FormPreviousLink, FormNextLink} from "grommet-icons";
 import {Tabs, Tab} from 'grommet';
 import axios from "axios";
 import userInfo from "../containers/userInfo";
@@ -10,16 +11,23 @@ import attendee_missing from "../images/default/avatar-missing.png";
 const COLUMNS = ["Avatar", "Rank", "Name", "Badges"];
 
 class AttendeeTable extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      lowestRank: 0
+    };
+    this.users = [];
+  }
 
   render() {
     const id = this.props.state.id;
-    const users = this.props.state.users.filter(e => this.props.learderboard ? !e.volunteer : e.volunteer);
-    const rank = users.findIndex(user => user.id === id);
+    this.users = this.props.state.users.filter(e => this.props.learderboard ? !e.volunteer : e.volunteer);
+    const rank = this.users.findIndex(user => user.id === id);
     const fontSize = this.props.size === "small" ? "small" : "large";
     let showRank;
     if(rank > 0) {
-      let myUser = users[rank];
-      if(rank > 9 && (this.props.learderboard ? !myUser.volunteer : myUser.volunteer)) {
+      let myUser = this.users[rank];
+      if((rank > this.state.lowestRank + 9 || rank < this.state.lowestRank) && (this.props.learderboard ? !myUser.volunteer : myUser.volunteer)) {
         const avatar = myUser.avatar.includes("missing") ? attendee_missing : myUser.avatar;
         showRank = <TableRow key={rank}>
           <TableCell key={COLUMNS[0]} verticalAlign="middle">
@@ -40,7 +48,7 @@ class AttendeeTable extends Component {
       }
     }
     return (
-      <Box align="center">
+      <Box align="center" gap="medium">
         <Table>
           <TableHeader>
             <TableRow>
@@ -52,7 +60,7 @@ class AttendeeTable extends Component {
             </TableRow>
           </TableHeader>
           <TableBody>
-            {users.slice(0, 10).map((u, i) => {
+            {this.users.slice(this.state.lowestRank, this.state.lowestRank + 10).map((u, i) => {
               const weight = u.id === this.props.state.id ? "bold" : "normal";
               const avatar = u.avatar.includes("missing") ? attendee_missing : u.avatar;
               return (
@@ -63,7 +71,7 @@ class AttendeeTable extends Component {
                     </RoutedButton>
                   </TableCell>
                   <TableCell key={COLUMNS[1]}>
-                    <Text weight={weight} size={fontSize}>{i+1}</Text>
+                    <Text weight={weight} size={fontSize}>{i+1+this.state.lowestRank}</Text>
                   </TableCell>
                   <TableCell key={COLUMNS[2]}>
                     <RoutedButton path={"/user/" + u.id}>
@@ -78,6 +86,20 @@ class AttendeeTable extends Component {
               {showRank}
             </TableBody>
           </Table>
+          <Box justify="start" direction="row">
+            <Button
+              disabled={this.state.lowestRank === 0}
+              onClick={() => this.lowestRank < 9 ? this.setState({lowestRank: 0}) : this.setState({lowestRank: this.state.lowestRank - 10})}
+              color="brand"
+              label={<Box direction="row" gap="xsmall"><FormPreviousLink /><Text>Previous 10</Text></Box>}
+            />
+            <Button
+              disabled={this.users.length < this.state.lowestRank + 10}
+              onClick={() => this.setState({lowestRank: this.state.lowestRank + 10})}
+              color="brand"
+              label={<Box direction="row" gap="xsmall"><Text>Next 10</Text><FormNextLink /></Box>}
+            />
+          </Box>
           <Box>
             <Text color="status-critical">{this.props.state.error}</Text>
           </Box>
