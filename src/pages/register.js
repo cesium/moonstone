@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Text, Button, FormField, TextInput, Box } from "grommet";
+import { Text, Button, FormField, TextInput, Box, RoutedButton } from "grommet";
 import axios from "axios";
 
 class RegisterPage extends Component {
@@ -132,6 +132,7 @@ class RegisterPage extends Component {
             onClick={this.register}
           />
         </Box>
+        <RoutedButton path="/login" label="login" color="brand" />
 
         <Box>
           <Text color="status-critical">{this.getErrorText()}</Text>
