@@ -17,6 +17,10 @@ class User extends Component {
 
   // Check if is registered
   componentDidMount() {
+    if(localStorage.getItem("jwt") === null) {
+      window.location.pathname = "/register/" + this.props.match.params.id;
+      return;
+    }
     const api_endpoint =
       process.env.REACT_APP_ENDPOINT
       + process.env.REACT_APP_API_IS_REGISTERED
@@ -38,13 +42,13 @@ class User extends Component {
       } else {
         UserData.prototype.getType()
           .then(type => {
-            if(type === "attendee") {
-              window.location.pathname = "/register/" + this.props.match.params.id;
-            } else {
+            if(type === "company") {
               this.setState({ error: "User not registered" });
+            } else {
+              window.location.pathname = "/register/" + this.props.match.params.id;
             }
           })
-          .catch(() => {});
+          .catch(e => this.handleRegisterCheckError(e));
       }
     }
   }
@@ -77,7 +81,8 @@ class User extends Component {
 
   handleErrorResponse(error) {
     if (error.response && error.response.data.hasOwnProperty("error")){
-      if(error.response.data.error === "invalid_token" || error.response.data.error === "unauthenticated") {
+      if(error.response.data.error === "invalid_token"
+        || error.response.data.error === "unauthenticated") {
         window.location.pathname = "/login";
       } else if(error.response.data.error === "Internal Server Error") {
         // lmao 500
@@ -93,11 +98,22 @@ class User extends Component {
     return (
       <Box>
         {this.state.error === "" ?
-            <Box align="center" pad={{ horizontal: "medium", bottom: "medium", top: "medium" }} gap="medium">
+            <Box
+              align="center"
+              pad={{ horizontal: "medium", bottom: "medium", top: "medium" }}
+              gap="medium"
+            >
               <Heading level="1" alignSelf="center">{this.state.user.nickname}</Heading>
               <Image width="300em" src={avatar}/>
-              <Heading level="2" alignSelf="center">Badges</Heading>
-              <BadgeDex badges={this.state.user.badges ? this.state.user.badges : []} allCollected={true}/>
+              {this.state.user.avatar ?
+                  <Heading level="2" alignSelf="center">Badges</Heading>
+                  :
+                  null
+              }
+              <BadgeDex
+                badges={this.state.user.badges ? this.state.user.badges : []}
+                allCollected={true}
+              />
             </Box>
             :
             <Box pad="large">
