@@ -10,11 +10,13 @@
 
 ## About Moonstone
 
-React Web App for the Badge Platform for CeSIUM's Computer Engineering Week
+NextJS Web App for the Badge Platform for CeSIUM's Computer Engineering Week
 event.
 
 This is a collaborative project alongside the
-[Safira](https://github.com/cesium/safira) backend platform.
+[Safira](https://github.com/cesium/safira) backend platform
+and the
+[NativeMoon](https://github.com/cesium/nativemoon) mobile app.
 
 ## Getting Started
 

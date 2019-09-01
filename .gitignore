@@ -22,3 +22,8 @@ yarn-error.log*
 
 
 .env
+
+.next/
+node_modules/
+/npm-debug.log
+/.env.production
