@@ -9,7 +9,7 @@
     "grommet": "2.3.1",
     "grommet-controls": "0.90.9",
     "grommet-icons": "4.1.0",
-    "lodash": "^4.17.11",
+    "lodash": "^4.17.19",
     "qrcode.react": "^0.8.0",
     "react": "^16.4.1",
     "react-chartjs-2": "^2.7.4",
