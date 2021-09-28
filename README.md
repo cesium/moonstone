@@ -8,6 +8,9 @@
 [![Netlify Status](https://api.netlify.com/api/v1/badges/943f4cac-75a3-4e85-856b-31603364a8a1/deploy-status)][netlify]
 [![Semaphore CI](https://semaphoreci.com/api/v1/cesiuminho/moonstone/branches/master/badge.svg)][semaphoreci]
 
+## ⚠️ Warning
+**This project is deprecated. Its functionality was integrated into the [main frontend codebase](https://github.com/cesium/seium.org).**
+
 ## About Moonstone
 
 React Web App for the Badge Platform for CeSIUM's Computer Engineering Week
